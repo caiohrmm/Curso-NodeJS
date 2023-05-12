@@ -1,0 +1,14 @@
+{
+  "name": "abstracao-de-input-com-inquirer",
+  "version": "1.0.0",
+  "description": "Utilizando o Inquirer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Caio Henrique",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^8.1.2"
+  }
+}
