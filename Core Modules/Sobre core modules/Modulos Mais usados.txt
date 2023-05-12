@@ -1,0 +1,9 @@
+Os core modules mais usados são -> 
+
+http -> Usado para criar servidores http
+
+path -> Utilizado para extrair informacao do caminho de arquivos
+
+fs -> Gerenciar arquivos do sistema
+
+url -> Trabalhar com url's
