@@ -1,4 +1,4 @@
-const url = require ('url')
+const url = require('url')
 
 const endereco = 'https://www.americanas.com.br/busca/bola-de-futebol'
 
