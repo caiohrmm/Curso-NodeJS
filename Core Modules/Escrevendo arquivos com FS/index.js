@@ -25,13 +25,23 @@ const server = http.createServer((req, res) => {
             return res.end()
         })
     }else { 
-        fs.writeFile("arquivo.txt",name + age , function(err,data) {
+        fs.appendFile("arquivo.txt",name + age , function(err,data) {
             res.writeHead(302, {
                 Location: '/',
             })
             return res.end()
         })
-        
+
+        // O writeFile substitui tudo que vier de novo
+        // O  adiciona mais dados ao mesmo arquivo.
+
+        // Remover arquivo -> 
+        // fs.unlink('arquivo', function(err){})
+
+        // Renomear arquivo -> 
+        // fs.rename('arquivo', 'arquivorenomeado', function(err){})
+
+
 
     }
 
