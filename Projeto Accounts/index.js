@@ -4,6 +4,7 @@ const inquirer = require("inquirer");
 
 // Requirindo core modules
 const fs = require("fs");
+const { parse } = require("path");
 
 operation();
 // Criando funçao de operaçao
@@ -35,11 +36,9 @@ function operation() {
       if (action === "Criar Conta") {
         createAccount();
       } else if (action === "Consultar Saldo") {
-
       } else if (action === "Realizar Depósito") {
-        deposit()
+        deposit();
       } else if (action === "Sacar") {
-
       } else if (action === "Sair") {
         inquirer
           .prompt([
@@ -54,20 +53,23 @@ function operation() {
             const quit = answer["confirmQuit"];
 
             if (quit === "Sim") {
-              console.log(chalk.bgBlueBright.bold`Obrigado por utilizar o banco Accounts! Até a próxima...`)
+              console.log(
+                chalk.bgBlueBright
+                  .bold`Obrigado por utilizar o banco Accounts! Até a próxima...`
+              );
             } else if (quit === "Não") {
-              operation()
+              operation();
             }
-
-          }).catch(err => console.log(err))
+          })
+          .catch((err) => console.log(err));
       }
-    }).catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
 }
 // Preciso definir o type do meu prompt que no caso é -> list
 // Nessa lista eu preciso de um enunciado definido pelo -> message
 /* Os itens da minha lista, ou acoes do meu banco serao definidos
 num array de escolhas */
-
 
 // Criando função de criar conta
 function createAccount() {
@@ -85,13 +87,13 @@ function buildAccount() {
         message: "Digite seu nome: ",
       },
       {
-        name: 'account',
-        message: 'Digite um nome para sua conta: '
-      }
+        name: "account",
+        message: "Digite um nome para sua conta: ",
+      },
     ])
     .then((answer) => {
       const account = answer["account"];
-      const userName = answer["accountName"]
+      const userName = answer["accountName"];
       inquirer
         .prompt([
           {
@@ -105,22 +107,38 @@ function buildAccount() {
           const confirm = answer["confirmAccount"];
           if (confirm === "Sim") {
             // Criar a conta
-            if (!fs.existsSync('Accounts')) {
-              fs.mkdirSync('Accounts')
+            if (!fs.existsSync("Accounts")) {
+              fs.mkdirSync("Accounts");
             }
 
             if (fs.existsSync(`Accounts/${account}.json`)) {
-              console.log(chalk.red('Essa conta já existe em nosso banco... Tente novamente!'))
-              buildAccount()
+              console.log(
+                chalk.red(
+                  "Essa conta já existe em nosso banco... Tente novamente!"
+                )
+              );
+              buildAccount();
             } else {
-              fs.writeFileSync(`Accounts/${account}.json`, '{"balance":0}', ((err) => console.log(err)))
+              fs.writeFileSync(
+                `Accounts/${account}.json`,
+                '{"balance":0}',
+                (err) => console.log(err)
+              );
 
-              console.log(chalk.greenBright(`Parabéns ${userName}. Você criou a sua conta no banco Accounts!`))
-              operation()
+              console.log(
+                chalk.greenBright(
+                  `Parabéns ${userName}. Você criou a sua conta no banco Accounts!`
+                )
+              );
+              operation();
             }
           } else {
-            console.log(chalk.bgRed.blackBright('Voltando para a tela de recepção de dados para criação de conta...'))
-            buildAccount()
+            console.log(
+              chalk.bgRed.blackBright(
+                "Voltando para a tela de recepção de dados para criação de conta..."
+              )
+            );
+            buildAccount();
           }
         })
         .catch((err) => console.log(err));
@@ -128,29 +146,79 @@ function buildAccount() {
     .catch((err) => console.log(err));
 }
 
-
-
 // Criando função de depósito
 
 function deposit() {
-  inquirer.prompt([{
-    name: 'accountName',
-    message: 'Digite o nome da sua conta: '
-  }]).then((answer) => {
-    const account = answer['accountName']
-    if (!checkAccount(account)) {
-      return deposit()
-    }
-  }).catch(err => console.log(err))
-
+  inquirer
+    .prompt([
+      {
+        name: "accountName",
+        message: "Digite o nome da sua conta: ",
+      },
+    ])
+    .then((answer) => {
+      const account = answer["accountName"];
+      if (!checkAccount(account)) {
+        return deposit();
+      } else {
+        inquirer
+          .prompt([
+            {
+              name: "amount",
+              message: `Digite a quantia que você deseja depositar na conta ${chalk.bgBlueBright(
+                account
+              )}: `,
+            },
+          ])
+          .then((answer) => {
+            const amount = answer["amount"];
+            addAmount(account, amount)
+          })
+          .catch((err) => console.log(err));
+      }
+    })
+    .catch((err) => console.log(err));
 }
 
 // Criando função que verifica se a conta existe ou não
 function checkAccount(accountName) {
   if (fs.existsSync(`Accounts/${accountName}.json`)) {
-    return true
+    return true;
   } else {
-    console.log(chalk.red.bold(`A conta ${chalk.bgBlueBright(accountName)} não existe no nosso banco.`))
-    return false
+    console.log(
+      chalk.red.bold(
+        `A conta ${chalk.bgBlueBright(accountName)} não existe no nosso banco.`
+      )
+    );
+    return false;
   }
+}
+
+// Criando uma funçao para adicionar fundos a minha conta
+
+function addAmount(accountName, amount) {
+  // Para receber esse account, preciso pegar meu arquivo json da pasta accounts por meio de outra funcao
+  const accountData = getAccount(accountName)
+  
+  if (!amount) {
+    console.log(chalk.red('Não foi possível verificar essa quantia. Tente novamente...'))
+    return deposit()
+  } else {
+  accountData.balance = parseFloat(amount) + parseFloat(accountData.balance) // Alterando o valor do balance -> convertendo de string para float e somando ao valor que já tem adicionado.
+
+  fs.writeFileSync(`Accounts/${accountName}.json`, JSON.stringify(accountData), ((err) => console.log(err)))
+
+  console.log(chalk.greenBright(`Depósito realizado com sucesso! Foi adicionado um valor de R$ ${amount} na conta ${accountName}`))
+  operation()
+  }
+
+}
+
+function getAccount(accountName) {
+  // Essa funcao transformará meu arquivo json em objeto javascript
+  const accountJSON = fs.readFileSync(`Accounts/${accountName}.json`, {
+    encoding: "utf8",
+    flag: "r",
+  });
+  return JSON.parse(accountJSON) // Converte o JSON em Objeto JavaScript
 }
