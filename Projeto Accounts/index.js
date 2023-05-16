@@ -40,6 +40,7 @@ function operation() {
       } else if (action === "Realizar Depósito") {
         deposit();
       } else if (action === "Sacar") {
+        withdrawn()
       } else if (action === "Sair") {
         inquirer
           .prompt([
@@ -248,10 +249,98 @@ function checkBalance() {
         return checkBalance();
       } else {
         const checkBalanceAccount = getAccount(account);
-        const balance = checkBalanceAccount.balance
-        console.log(chalk.greenBright(`Olá ${account} ! Você possui R$ ${chalk.red(balance)} em sua conta.`))
-        operation()
+        const balance = checkBalanceAccount.balance;
+        console.log(
+          chalk.greenBright(
+            `Olá ${account} ! Você possui R$ ${chalk.red(
+              balance
+            )} em sua conta.`
+          )
+        );
+        operation();
       }
     })
     .catch((err) => console.log(err));
 }
+
+// Criando função de saque
+
+function withdrawn() {
+  inquirer
+    .prompt([
+      {
+        name: "accountName",
+        message: "Digite o nome da sua conta: ",
+      },
+    ])
+    .then((answer) => {
+      const account = answer["accountName"];
+      if (!checkAccount(account)) {
+        return deposit();
+      } else {
+        inquirer
+          .prompt([
+            {
+              name: "amount",
+              message: `Digite a quantia que você deseja sacar na conta ${chalk.bgBlueBright(
+                account
+              )}: `,
+            },
+          ])
+          .then((answer) => {
+            const amount = answer["amount"];
+            removeAmount(account, amount);
+          })
+          .catch((err) => console.log(err));
+      }
+    })
+    .catch((err) => console.log(err));
+}
+
+// Criando função que verifica se a conta existe ou não
+function checkAccount(accountName) {
+  if (fs.existsSync(`Accounts/${accountName}.json`)) {
+    return true;
+  } else {
+    console.log(
+      chalk.red.bold(
+        `A conta ${chalk.bgBlueBright(accountName)} não existe no nosso banco.`
+      )
+    );
+    return false;
+  }
+}
+
+// Criando uma funçao para adicionar fundos a minha conta
+
+function removeAmount(accountName, amount) {
+  // Para receber esse account, preciso pegar meu arquivo json da pasta accounts por meio de outra funcao
+  const accountData = getAccount(accountName);
+
+  if (!amount) {
+    console.log(
+      chalk.red("Não foi possível verificar essa quantia. Tente novamente...")
+    );
+    return deposit();
+  } else if (parseFloat(amount) > parseFloat(accountData.balance)) {
+    console.log(chalk.red(`A conta ${accountName} não possui saldo suficiente para realizar o saque de R$ ${amount}`))
+    return operation()
+  } else {
+  
+  }
+    accountData.balance = parseFloat(accountData.balance) - parseFloat(amount); // Alterando o valor do balance -> convertendo de string para float e somando ao valor que já tem adicionado.
+
+    fs.writeFileSync(
+      `Accounts/${accountName}.json`,
+      JSON.stringify(accountData),
+      (err) => console.log(err)
+    );
+
+    console.log(
+      chalk.greenBright(
+        `Saque realizado com sucesso! Foi removido um valor de R$ ${amount} na conta ${accountName}`
+      )
+    );
+    operation();
+  }
+
