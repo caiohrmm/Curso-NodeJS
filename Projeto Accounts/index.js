@@ -5,6 +5,7 @@ const inquirer = require("inquirer");
 // Requirindo core modules
 const fs = require("fs");
 
+operation();
 // Criando funçao de operaçao
 
 function operation() {
@@ -30,14 +31,20 @@ function operation() {
       },
     ])
     .then((answer) => {
-        const action = answer['action'] // Me retorna em string a ação que o usuário escolheu
+      const action = answer["action"]; // Me retorna em string a ação que o usuário escolheu
+      if (action === "Criar Conta") {
+        criarConta();
+      }
     })
     .catch((err) => console.log(err));
+}
+
+function createAccount() {
+    console.log(chalk.bgGreen.red('Obrigado por utilizar nosso banco!'))
+    console.log(chalk.bgGreen('Insira alguns dados para criar sua conta!'))
 }
 
 // Preciso definir o type do meu prompt que no caso é -> list
 // Nessa lista eu preciso de um enunciado definido pelo -> message
 /* Os itens da minha lista, ou acoes do meu banco serao definidos
 num array de escolhas */
-
-operation();
