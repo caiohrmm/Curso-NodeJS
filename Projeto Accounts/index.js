@@ -37,7 +37,7 @@ function operation() {
       } else if (action === "Consultar Saldo") {
 
       } else if (action === "Realizar Depósito") {
-
+        deposit()
       } else if (action === "Sacar") {
 
       } else if (action === "Sair") {
@@ -68,12 +68,15 @@ function operation() {
 /* Os itens da minha lista, ou acoes do meu banco serao definidos
 num array de escolhas */
 
+
+// Criando função de criar conta
 function createAccount() {
   console.log(chalk.bgGreen.red("Obrigado por utilizar nosso banco!"));
   console.log(chalk.bgGreen("Insira alguns dados para criar sua conta!"));
   buildAccount();
 }
 
+// Criando função de construção da conta -> arquivo.json
 function buildAccount() {
   inquirer
     .prompt([
@@ -123,4 +126,31 @@ function buildAccount() {
         .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
+}
+
+
+
+// Criando função de depósito
+
+function deposit() {
+  inquirer.prompt([{
+    name: 'accountName',
+    message: 'Digite o nome da sua conta: '
+  }]).then((answer) => {
+    const account = answer['accountName']
+    if (!checkAccount(account)) {
+      return deposit()
+    }
+  }).catch(err => console.log(err))
+
+}
+
+// Criando função que verifica se a conta existe ou não
+function checkAccount(accountName) {
+  if (fs.existsSync(`Accounts/${accountName}.json`)) {
+    return true
+  } else {
+    console.log(chalk.red.bold(`A conta ${chalk.bgBlueBright(accountName)} não existe no nosso banco.`))
+    return false
+  }
 }
