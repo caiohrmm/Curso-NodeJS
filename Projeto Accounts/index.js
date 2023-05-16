@@ -34,9 +34,34 @@ function operation() {
       const action = answer["action"]; // Me retorna em string a ação que o usuário escolheu
       if (action === "Criar Conta") {
         createAccount();
+      } else if (action === "Consultar Saldo") {
+
+      } else if (action === "Realizar Depósito") {
+
+      } else if (action === "Sacar") {
+
+      } else if (action === "Sair") {
+        inquirer
+          .prompt([
+            {
+              type: "list",
+              name: "confirmQuit",
+              message: `Tem certeza que deseja sair ?`,
+              choices: ["Sim", "Não"],
+            },
+          ])
+          .then((answer) => {
+            const quit = answer["confirmQuit"];
+
+            if (quit === "Sim") {
+              console.log(chalk.bgBlueBright.bold`Obrigado por utilizar o banco Accounts! Até a próxima...`)
+            } else if (quit === "Não") {
+              operation()
+            }
+
+          }).catch(err => console.log(err))
       }
-    })
-    .catch((err) => console.log(err));
+    }).catch((err) => console.log(err));
 }
 // Preciso definir o type do meu prompt que no caso é -> list
 // Nessa lista eu preciso de um enunciado definido pelo -> message
@@ -78,12 +103,12 @@ function buildAccount() {
           if (confirm === "Sim") {
             // Criar a conta
             if (!fs.existsSync('Accounts')) {
-                fs.mkdirSync('Accounts')
+              fs.mkdirSync('Accounts')
             }
 
             if (fs.existsSync(`Accounts/${account}.json`)) {
-                console.log(chalk.red('Essa conta já existe em nosso banco... Tente novamente!'))
-                buildAccount()
+              console.log(chalk.red('Essa conta já existe em nosso banco... Tente novamente!'))
+              buildAccount()
             } else {
               fs.writeFileSync(`Accounts/${account}.json`, '{"balance":0}', ((err) => console.log(err)))
 
@@ -93,7 +118,7 @@ function buildAccount() {
           } else {
             console.log(chalk.bgRed.blackBright('Voltando para a tela de recepção de dados para criação de conta...'))
             buildAccount()
-        }
+          }
         })
         .catch((err) => console.log(err));
     })
