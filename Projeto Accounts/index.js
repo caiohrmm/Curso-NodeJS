@@ -27,6 +27,7 @@ function operation() {
           "Consultar Saldo",
           "Realizar Depósito",
           "Sacar",
+          "Excluir Conta",
           "Sair",
         ],
       },
@@ -39,8 +40,10 @@ function operation() {
         checkBalance();
       } else if (action === "Realizar Depósito") {
         deposit();
+      } else if (action === "Excluir Conta") {
+        deleteAccount();
       } else if (action === "Sacar") {
-        withdrawn()
+        withdrawn();
       } else if (action === "Sair") {
         inquirer
           .prompt([
@@ -323,24 +326,77 @@ function removeAmount(accountName, amount) {
     );
     return deposit();
   } else if (parseFloat(amount) > parseFloat(accountData.balance)) {
-    console.log(chalk.red(`A conta ${accountName} não possui saldo suficiente para realizar o saque de R$ ${amount}`))
-    return operation()
-  } else {
-  
-  }
-    accountData.balance = parseFloat(accountData.balance) - parseFloat(amount); // Alterando o valor do balance -> convertendo de string para float e somando ao valor que já tem adicionado.
-
-    fs.writeFileSync(
-      `Accounts/${accountName}.json`,
-      JSON.stringify(accountData),
-      (err) => console.log(err)
-    );
-
     console.log(
-      chalk.greenBright(
-        `Saque realizado com sucesso! Foi removido um valor de R$ ${amount} na conta ${accountName}`
+      chalk.red(
+        `A conta ${accountName} não possui saldo suficiente para realizar o saque de R$ ${amount}`
       )
     );
-    operation();
+    return operation();
+  } else {
   }
+  accountData.balance = parseFloat(accountData.balance) - parseFloat(amount); // Alterando o valor do balance -> convertendo de string para float e somando ao valor que já tem adicionado.
 
+  fs.writeFileSync(
+    `Accounts/${accountName}.json`,
+    JSON.stringify(accountData),
+    (err) => console.log(err)
+  );
+
+  console.log(
+    chalk.greenBright(
+      `Saque realizado com sucesso! Foi removido um valor de R$ ${amount} na conta ${accountName}`
+    )
+  );
+  operation();
+}
+
+function deleteAccount() {
+  inquirer
+    .prompt([
+      {
+        name: "accountName",
+        message: "Digite o nome da conta que você deseja excluir: ",
+      },
+    ])
+    .then((answer) => {
+      const account = answer["accountName"];
+
+      if (!checkAccount(account)) {
+        return operation();
+      } else {
+        inquirer
+          .prompt([
+            {
+              name: "confirmDeleteAccount",
+              type: "list",
+              message: `Tem certeza que deseja excluir a conta ${account} do banco? `,
+              choices: ["Sim", "Não"],
+            },
+          ])
+          .then((answer) => {
+            const confirm = answer["confirmDeleteAccount"];
+
+            if (confirm === "Sim") {
+              removeAccount(account);
+            } else if (confirm === "Não") {
+              console.log(chalk.blueBright("Voltando para tela inicial..."));
+              return operation()
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+    })
+    .catch((err) => console.log(err));
+}
+
+function removeAccount(accountName) {
+  fs.unlink(`Accounts/${accountName}.json`, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(
+        chalk.green("Operação de exclusão de conta concluída com sucesso!")
+      );
+    }
+  });
+}
