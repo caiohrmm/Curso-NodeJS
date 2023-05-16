@@ -33,18 +33,59 @@ function operation() {
     .then((answer) => {
       const action = answer["action"]; // Me retorna em string a ação que o usuário escolheu
       if (action === "Criar Conta") {
-        criarConta();
+        createAccount();
       }
     })
     .catch((err) => console.log(err));
 }
-
-function createAccount() {
-    console.log(chalk.bgGreen.red('Obrigado por utilizar nosso banco!'))
-    console.log(chalk.bgGreen('Insira alguns dados para criar sua conta!'))
-}
-
 // Preciso definir o type do meu prompt que no caso é -> list
 // Nessa lista eu preciso de um enunciado definido pelo -> message
 /* Os itens da minha lista, ou acoes do meu banco serao definidos
 num array de escolhas */
+
+function createAccount() {
+  console.log(chalk.bgGreen.red("Obrigado por utilizar nosso banco!"));
+  console.log(chalk.bgGreen("Insira alguns dados para criar sua conta!"));
+  buildAccount();
+}
+
+function buildAccount() {
+  inquirer
+    .prompt([
+      {
+        name: "accountName",
+        message: "Digite um nome para sua conta: ",
+      },
+    ])
+    .then((answer) => {
+      const accountName = answer["accountName"];
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "confirmAccount",
+            message: `Sua conta se chamará: ${accountName}. Correto?`,
+            choices: ["Sim", "Não"],
+          },
+        ])
+        .then((answer) => {
+          const confirm = answer["confirmAccount"];
+          if (confirm === "Sim") {
+            // Criar a conta
+            if (!fs.existsSync('Accounts')) {
+                fs.mkdir('Accounts')
+            }
+
+            if (fs.existsSync(`Accounts/${accountName}.json`)) {
+                console.log('Essa conta já existe em nosso banco... Tente novamente!')
+                buildAccount()
+            }
+          } else {
+            console.log(chalk.bgRed.blackBright('Voltando para a tela de recepção de dados para criação de conta...'))
+            buildAccount()
+        }
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
+}
