@@ -36,6 +36,7 @@ function operation() {
       if (action === "Criar Conta") {
         createAccount();
       } else if (action === "Consultar Saldo") {
+        checkBalance();
       } else if (action === "Realizar Depósito") {
         deposit();
       } else if (action === "Sacar") {
@@ -172,7 +173,7 @@ function deposit() {
           ])
           .then((answer) => {
             const amount = answer["amount"];
-            addAmount(account, amount)
+            addAmount(account, amount);
           })
           .catch((err) => console.log(err));
       }
@@ -198,20 +199,29 @@ function checkAccount(accountName) {
 
 function addAmount(accountName, amount) {
   // Para receber esse account, preciso pegar meu arquivo json da pasta accounts por meio de outra funcao
-  const accountData = getAccount(accountName)
-  
+  const accountData = getAccount(accountName);
+
   if (!amount) {
-    console.log(chalk.red('Não foi possível verificar essa quantia. Tente novamente...'))
-    return deposit()
+    console.log(
+      chalk.red("Não foi possível verificar essa quantia. Tente novamente...")
+    );
+    return deposit();
   } else {
-  accountData.balance = parseFloat(amount) + parseFloat(accountData.balance) // Alterando o valor do balance -> convertendo de string para float e somando ao valor que já tem adicionado.
+    accountData.balance = parseFloat(amount) + parseFloat(accountData.balance); // Alterando o valor do balance -> convertendo de string para float e somando ao valor que já tem adicionado.
 
-  fs.writeFileSync(`Accounts/${accountName}.json`, JSON.stringify(accountData), ((err) => console.log(err)))
+    fs.writeFileSync(
+      `Accounts/${accountName}.json`,
+      JSON.stringify(accountData),
+      (err) => console.log(err)
+    );
 
-  console.log(chalk.greenBright(`Depósito realizado com sucesso! Foi adicionado um valor de R$ ${amount} na conta ${accountName}`))
-  operation()
+    console.log(
+      chalk.greenBright(
+        `Depósito realizado com sucesso! Foi adicionado um valor de R$ ${amount} na conta ${accountName}`
+      )
+    );
+    operation();
   }
-
 }
 
 function getAccount(accountName) {
@@ -220,5 +230,28 @@ function getAccount(accountName) {
     encoding: "utf8",
     flag: "r",
   });
-  return JSON.parse(accountJSON) // Converte o JSON em Objeto JavaScript
+  return JSON.parse(accountJSON); // Converte o JSON em Objeto JavaScript
+}
+
+// Criando função para consultar saldo.
+function checkBalance() {
+  inquirer
+    .prompt([
+      {
+        name: "accountName",
+        message: "Digite o nome da sua conta: ",
+      },
+    ])
+    .then((answer) => {
+      const account = answer["accountName"];
+      if (!checkAccount(account)) {
+        return checkBalance();
+      } else {
+        const checkBalanceAccount = getAccount(account);
+        const balance = checkBalanceAccount.balance
+        console.log(chalk.greenBright(`Olá ${account} ! Você possui R$ ${chalk.red(balance)} em sua conta.`))
+        operation()
+      }
+    })
+    .catch((err) => console.log(err));
 }
