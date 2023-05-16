@@ -54,17 +54,22 @@ function buildAccount() {
     .prompt([
       {
         name: "accountName",
-        message: "Digite um nome para sua conta: ",
+        message: "Digite seu nome: ",
       },
+      {
+        name: 'account',
+        message: 'Digite um nome para sua conta: '
+      }
     ])
     .then((answer) => {
-      const accountName = answer["accountName"];
+      const account = answer["account"];
+      const userName = answer["accountName"]
       inquirer
         .prompt([
           {
             type: "list",
             name: "confirmAccount",
-            message: `Sua conta se chamará: ${accountName}. Correto?`,
+            message: `Olá ${userName}! Sua conta se chamará: ${account}. Correto?`,
             choices: ["Sim", "Não"],
           },
         ])
@@ -73,12 +78,17 @@ function buildAccount() {
           if (confirm === "Sim") {
             // Criar a conta
             if (!fs.existsSync('Accounts')) {
-                fs.mkdir('Accounts')
+                fs.mkdirSync('Accounts')
             }
 
-            if (fs.existsSync(`Accounts/${accountName}.json`)) {
-                console.log('Essa conta já existe em nosso banco... Tente novamente!')
+            if (fs.existsSync(`Accounts/${account}.json`)) {
+                console.log(chalk.red('Essa conta já existe em nosso banco... Tente novamente!'))
                 buildAccount()
+            } else {
+              fs.writeFileSync(`Accounts/${account}.json`, '{"balance":0}', ((err) => console.log(err)))
+
+              console.log(chalk.greenBright(`Parabéns ${userName}. Você criou a sua conta no banco Accounts!`))
+              operation()
             }
           } else {
             console.log(chalk.bgRed.blackBright('Voltando para a tela de recepção de dados para criação de conta...'))
