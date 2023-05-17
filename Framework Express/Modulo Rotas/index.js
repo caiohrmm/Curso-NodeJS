@@ -17,15 +17,6 @@ const port = 3000
 // Agora comecarei minha aplicação
 
 // Método get -> O usuário visualizar a pagina já é um GET, nele terei 2 parametros
-/*
-1 - Rota
-2 - Requisição e resposta. Requisição é o usuário que envia, resposta é o que o servidor envia de volta pro usuário
-
-*/
-
-app.get('/nomes/add', (req, res) => {
-    res.sendFile(`${basePath}/addname.html`)
-})
 
 // Lendo o body
 app.use(
@@ -35,32 +26,10 @@ app.use(
 )
 app.use(express.json())
 
-// Com isso, toda a requisição feita no formulario é transformada em um obj javascript onde consigo pegar seus valores.
+// Importando o módulo de rotas para nomes
+const nomesRoutes = require('./nomes')
 
-// Fazendo meu post
-app.post('/nomes/save', (req, res) => {
-    // Preciso recuperar o body do meu formulário aqui no meu post
-    const name = req.body.name
-    const age = req.body.age
-
-    console.log(`Olá ${name} você tem ${age} anos`)
-})
-
-
-
-app.get('/nomes/:idnome', (req, res) => {
-    res.sendFile(`${basePath}/nomes.html`)
-    const idName = req.params.idnome
-    console.log(`Estamos buscando pelo ${idName} nome do banco de dados.` )
-})
-
-app.get('/nomes', (req, res) => {
-    res.sendFile(`${basePath}/nomes.html`)
-})
-
-
-
-
+app.use('/nomes', nomesRoutes) // Para chamar o módulo -> indico a base das rotas -> /nomes e a pasta onde elas estao
 
 // A url principal -> / Sempre fica em último na listagem das URL's por que senao todas cairiam nela.
 app.get('/', (req, res) => {
