@@ -4,8 +4,13 @@ const app = express();
 
 const port = 3000;
 
+// Setup partials
+const hbs = exphbs.create({
+    partialsDir: ["views/partials"]
+})
+
 // Setup handlebars
-app.engine("handlebars", exphbs.engine());
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 // Estruturas de repetição -> é o each, tem a mesma sintaxe do if {{#each}} {{/each}} e os itens serao acessados por this
@@ -20,6 +25,9 @@ const cars = [
   },
 ];
 // Definindo a rota de dashboard
+
+// Os partials sao tipo os components do React -> Crio um minitemplate que pode ser reutilizado em um template de rota quantas vezes eu quisers
+
 app.get("/dashboard", (req, res) => {
   res.render("dashboard", { cars });
 }); // Para pegar meu objeto no handlebars é com o this.atributo

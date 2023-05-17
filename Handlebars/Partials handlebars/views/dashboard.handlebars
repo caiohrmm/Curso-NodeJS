@@ -3,8 +3,18 @@
 
 <ul>
   {{#each cars}}
-    <li>Carro {{this.id}} - {{this.name}}</li>
+  {{> carsPartials}}
   {{/each}}
+  {{#each cars}}
+  {{> carsPartials}}
+  {{/each}}
+  {{#each cars}}
+  {{> carsPartials}}
+  {{/each}}
+  {{#each cars}}
+  {{> carsPartials}}
+  {{/each}}
+  
 </ul>
 
 <a href="/">Voltar para a home</a>
