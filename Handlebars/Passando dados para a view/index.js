@@ -20,7 +20,6 @@ const car = {
 }
 
 
-
 // Definir minha rota home
 app.get('/', (req, res) => {
     res.render('home', { user, carro: car })
