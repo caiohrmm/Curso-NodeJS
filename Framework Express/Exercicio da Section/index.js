@@ -23,8 +23,7 @@ app.use(express.json())
 const products = require('./Produtos')
 app.use('/products', products)
 
-
-app.get('/', (req, res) => {
+app.get('/', (req, res) => {    
     res.sendFile(`${basePath}/index.html`)
 
 })
