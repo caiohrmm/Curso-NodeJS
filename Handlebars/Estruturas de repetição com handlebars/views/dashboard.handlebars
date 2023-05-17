@@ -1,0 +1,10 @@
+<h1>Minha dashboard</h1>
+<p>Agora tenho certeza que você está autenticado!</p>
+
+<ul>
+  {{#each cars}}
+    <li>Carro {{this.id}} - {{this.name}}</li>
+  {{/each}}
+</ul>
+
+<a href="/">Voltar para a home</a>
