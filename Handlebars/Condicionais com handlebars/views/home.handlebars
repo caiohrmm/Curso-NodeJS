@@ -1,0 +1,14 @@
+<h1>Bem - Vindo handlebars</h1>
+<p>Layout com handlebars</p>
+<p>O usuario que eu mandei pra ca foi o {{user.name}} e ele tem {{user.age}} anos</p>
+<p>{{user.name}} tem um carro {{carro.model}} da {{carro.brand}} de {{carro.year}}</p>
+
+{{#if auth}}
+    <h1>Visite nossa dashboard</h1>
+    <p>Você está autenticado.</p>
+    <a href="/dashboard">Clique aqui</a>
+    {{else}}
+    <p>Você nao está autenticado em nosso sistema!</p>
+{{/if}}
+
+
