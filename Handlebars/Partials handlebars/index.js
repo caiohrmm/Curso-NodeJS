@@ -50,4 +50,6 @@ app.get("/", (req, res) => {
   res.render("home", { user, carro: car, auth: autenticado });
 });
 
+// O CSS com o handlebars é a mesma coisa porém se eu quiser aplicar um css para todas as páginas, basta aplicá-lo no layout
+
 app.listen(port, () => console.log(`Servidor rodando na porta ${port} !`));

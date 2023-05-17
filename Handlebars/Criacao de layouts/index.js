@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 }) 
 
 // Criando layout -> Serve para reaproveitar codigo entre as paginas.
-// Criar uma pasta layout em views
+// Criar uma pasta layouts em views
 // De acordo com a pagina o body sempre muda por conta do {{{body}}} mas o que está fora dele continua para todas as paginas
 // Muito util para deixar uma navbar e um footer e so mexer no que tem de conteudo da pagina!
 

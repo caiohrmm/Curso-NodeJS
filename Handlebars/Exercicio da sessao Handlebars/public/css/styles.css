@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header {
+  height: 80px;
+  background-color: aquamarine;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header h1 {
+
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: chartreuse;
+  text-decoration: underline;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: lightgray;
+}
+
+.produtos { 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.produtos1 {
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
