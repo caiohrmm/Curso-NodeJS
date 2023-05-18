@@ -1,3 +1,12 @@
-<div class="container-products">
-    
+<div class="container-main">
+  {{#each products}}
+    <div class="container-products">
+      <h1>{{this.nameproduct}}</h1>
+      <h3>{{this.idproduct}}</h3>
+      <p>Preço - {{this.priceproduct}}</p>
+    </div>
+  {{/each}}
+  <div class="voltar">
+    <button><a href="/">Adicionar produto</a></button>
+  </div>
 </div>
