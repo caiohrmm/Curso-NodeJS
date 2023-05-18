@@ -4,9 +4,9 @@ const exphbs = require("express-handlebars");
 // Conexao com o MySQL
 const mysql = require("mysql");
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
+  host: "26.84.4.194",
+  user: "caiohenrique",
+  password: "joj123",
   database: "products",
 });
 // Os parametros sao host, user, password e o banco que irei ligar.
@@ -60,7 +60,7 @@ app.get("/products", (req, res) => {
       console.log(err);
     } else {
       const products = data;
-      console.log(products)
+      console.log(products);
       res.render("products", { products });
     }
   });
@@ -70,9 +70,21 @@ app.get("/products", (req, res) => {
 clickar no titulo do produto, ele guardará seu id e isso me dará o seu filtro para exibir uma tela com somente esse produto.
 */
 
-app.get('/products/:id', (req, res) => {
-  const id = req.params.id 
-})
+app.get("/products/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  // Tenho o id que será o parametro do meu where, agora preciso do comando sql
+  const sql = `SELECT * FROM product WHERE idproduct=${id}`;
+
+  connection.query(sql, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      const product = data[0]; // Como só chegará um produto, pego o array do primeiro objeto.
+      res.render("product", { product });
+    }
+  });
+});
 
 app.get("/", (req, res) => {
   res.render("home");
