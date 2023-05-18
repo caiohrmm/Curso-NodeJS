@@ -1,0 +1,27 @@
+<div class="container-main">
+<h3 class="titulo-form">Cadastre um produto</h3>
+<form action="/product/add" method="post" class="form">
+
+  <div class="form-control">
+    <label for="name">Nome do produto: </label>
+    <input type="text" placeholder="Digite o nome do produto..." name="name" />
+  </div>
+  <div class="form-control">
+    <label for="price">Preco do produto: </label>
+    <input
+      type="text"
+      placeholder="Digite o preço do produto..."
+      name="price"
+    />
+  </div>
+  <div class="form-submit">
+    <input type="submit" value="Cadastrar" />
+  </div>
+</form>
+
+<div class="verprodutos">
+    <button>
+      <a href="/products">Ver produtos</a>
+    </button>
+  </div>
+</div>
