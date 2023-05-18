@@ -29,12 +29,16 @@ app.post("/product/add", (req, res) => {
   const name = req.body.name;
   const price = req.body.price;
 
+  // Quando eu tenho valores que vem por variaveis para jogar no meu comando sql, utilizo uma forma de protecao para as queries
+  const data = ['nameproduct', 'priceproduct', name, price]
+  // Nome de colunas -> ??
+  // Valores -> ?
   // Recebi os dados do meu formulario nas variaveis, agora irei jogar para o banco
-  const sql = `INSERT INTO product (nameproduct, priceproduct) VALUES ('${name}', ${price})`;
+  const sql = `INSERT INTO product (??, ??) VALUES (?, ?)`;
   // Preciso criar uma string que contenha o comando sql de insert
 
   // Após criado a string que contenha o comando sql, preciso executalo
-  pool.query(sql, (err) => {
+  pool.query(sql, data,  (err) => {
     if (err) {
       console.log(err);
     } else {
@@ -47,10 +51,11 @@ app.post("/product/add", (req, res) => {
 // Select / Read
 app.get("/products", (req, res) => {
   // Aqui irei fazer o select dos meus dados
-  const sql = `SELECT * FROM product`;
+  const data = ['product']
+  const sql = `SELECT * FROM ??`;
 
   // Essa execucacao me voltará dados, que conseguirei acessar via parametro da minha funcao de callback
-  pool.query(sql, (err, data) => {
+  pool.query(sql, data,  (err, data) => {
     if (err) {
       console.log(err);
     } else {
@@ -68,9 +73,10 @@ app.get("/products/:id", (req, res) => {
   const id = parseInt(req.params.id);
 
   // Tenho o id que será o parametro do meu where, agora preciso do comando sql
-  const sql = `SELECT * FROM product WHERE idproduct=${id}`;
+  const data = ['product', 'idproduct', id]
+  const sql = `SELECT * FROM ?? WHERE ??=?`;
 
-  pool.query(sql, (err, data) => {
+  pool.query(sql, data,  (err, data) => {
     if (err) {
       console.log(err);
       return;
@@ -85,10 +91,12 @@ app.get("/products/:id", (req, res) => {
 
 app.get("/products/edit/:id", (req, res) => {
   const id = parseInt(req.params.id);
+  
+  const data = ['product', 'idproduct', id ]
 
-  const sql = `SELECT * FROM product WHERE idproduct=${id}`;
+  const sql = `SELECT * FROM ?? WHERE ??=?`;
 
-  pool.query(sql, (err, data) => {
+  pool.query(sql, data,  (err, data) => {
     if (err) {
       console.log(err);
       return;
@@ -104,8 +112,11 @@ app.post("/products/update", (req, res) => {
   const id = req.body.id;
   const name = req.body.name;
   const price = req.body.price;
-  const sql = `UPDATE product SET nameproduct = '${name}', priceproduct = '${price}' WHERE idproduct=${id}`;
-  pool.query(sql, (err) => {
+
+  const data = ['product', 'nameproduct', name, 'priceproduct', price, 'idproduct', id ]
+
+  const sql = `UPDATE ?? SET ?? = ?, ?? = ? WHERE ??=?`;
+  pool.query(sql, data, (err) => {
     if (err) {
       console.log(err);
       return;
@@ -120,9 +131,11 @@ app.post("/products/update", (req, res) => {
 app.post("/products/delete/:id", (req, res) => {
   const id = req.params.id;
 
-  const sql = `DELETE FROM product WHERE idproduct=${id}`;
+  const data = ['product', 'idproduct', id]
 
-  pool.query(sql, (err) => {
+  const sql = `DELETE FROM ?? WHERE ??=?`;
+
+  pool.query(sql, data ,(err) => {
     if (err) {
       console.log(err);
       return;
