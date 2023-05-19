@@ -2,7 +2,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 
 // Conexao com o MySQL através do pool
-const connection = require("./db/connection");
+const dbconnection = require("./db/connection");
 
 // Os parametros sao host, user, password e o banco que irei ligar.
 
