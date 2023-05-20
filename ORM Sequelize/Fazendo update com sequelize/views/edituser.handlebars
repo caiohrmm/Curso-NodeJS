@@ -1,0 +1,25 @@
+<div class="container">
+  <h1 class="titulo-form">Edite um usuário</h1>
+  {{#with user}}
+  <form action="/users/edit/editing/{{id}}" method="post" class="form">
+    <div class="form-control">
+      <label for="name">Digite seu nome: </label>
+      <input type="text" value="{{name}}" name="name" />
+    </div>
+    <div class="form-control">
+      <label for="occupation">Digite sua profissão: </label>
+      <input type="text" value="{{occupation}}" name="occupation" />
+    </div>
+    <div>
+      <label for="isworking">Está trabalhando? </label>
+      <select name="isworking">
+        <option value="yes">Sim</option>
+        <option value="no">Não</option>
+      </select>
+    </div>
+    <div>
+      <input type="submit" value="Editar" class="btn" />
+    </div>
+  </form>
+  {{/with}}
+</div>
