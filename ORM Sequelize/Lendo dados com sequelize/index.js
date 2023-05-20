@@ -63,8 +63,10 @@ app.post("/users/insert", async (req, res) => {
   res.redirect('/users/add')
 });
 
-// Agora, pra eu rodar o meu servidor eu vou depender do OK do banco de dados
 
+
+
+// Agora, pra eu rodar o meu servidor eu vou depender do OK do banco de dados
 dbconnection
   .sync()
   .then(

@@ -19,6 +19,20 @@ body {
     text-align: center;
 }
 
+.cabecalho ul {
+    list-style: none;
+    margin-left: 40px;
+    display: flex;
+}
+.cabecalho ul li a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.cabecalho ul li {
+    margin-right: 10px;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -113,16 +127,22 @@ body {
 .containerusers {
     display: flex;
     flex-wrap: wrap;
-    max-width: 1200px;
+    max-width: 80%;
     gap: 10px;
+    margin: 0 auto;
+    margin-top: 20px;
 }
 
 .containerusers .item {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 1.4em;
-    flex: 1 1;
-    max-width: 50%;
+    flex: 1 1 29%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 
