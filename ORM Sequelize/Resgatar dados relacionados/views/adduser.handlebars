@@ -1,0 +1,23 @@
+<div class="container">
+  <h1 class="titulo-form">Cadastre um usuário</h1>
+  <form action="/users/insert" method="post" class="form">
+    <div class="form-control">
+      <label for="name">Digite seu nome: </label>
+      <input type="text" name="name" />
+    </div>
+    <div class="form-control">
+      <label for="occupation">Digite sua profissão: </label>
+      <input type="text" name="occupation" />
+    </div>
+    <div>
+      <label for="isworking">Está trabalhando? </label>
+      <select name="isworking">
+        <option value="yes">Sim</option>
+        <option value="no">Não</option>
+      </select>
+    </div>
+    <div>
+      <input type="submit" value="Cadastrar" class="btn" />
+    </div>
+  </form>
+</div>

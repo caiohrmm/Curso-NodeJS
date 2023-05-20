@@ -1,0 +1,66 @@
+<div class="container">
+  <h1 class="titulo-form">Edite um usuário</h1>
+  {{#with user}}
+    <form action="/users/editing" method="post" class="form">
+      <input type="hidden" name="id" value="{{id}}" />
+      <div class="form-control">
+        <label for="name">Digite seu nome: </label>
+        <input type="text" value="{{name}}" name="name" />
+      </div>
+      <div class="form-control">
+        <label for="occupation">Digite sua profissão: </label>
+        <input type="text" value="{{occupation}}" name="occupation" />
+      </div>
+      <div>
+        <label for="isworking">Está trabalhando? </label>
+        <select name="isworking">
+          <option value="yes">Sim</option>
+          <option value="no">Não</option>
+        </select>
+      </div>
+      <div>
+        <input type="submit" value="Editar" class="btn" />
+      </div>
+    </form>
+  {{/with}}
+</div>
+<div class="address">
+  <h4 class="titulo-form">Edite o endereço do usuário</h4>
+  <form action="/address/add" method="post">
+    <input type="hidden" name="id" value="{{user.id}}" />
+    <div class="form-control">
+      <label for="street">Digite a rua: </label>
+      <input type="text" name="street" />
+    </div>
+    <div class="form-control">
+      <label for="number">Digite o numero: </label>
+      <input type="text" name="number" />
+    </div>
+    <div class="form-control">
+      <label for="city">Digite a cidade: </label>
+      <input type="text" name="city" />
+    </div>
+    <div>
+      <input type="submit" value="Enviar" />
+    </div>
+  </form>
+</div>
+
+<div class="addresslist">
+  {{#each user.Addresses}}
+    <div class="addresses">
+      {{this.id}}
+      -
+      {{this.street}}
+      -
+      {{this.number}}
+      -
+      {{this.city}}
+      -
+      <form action="/address/delete" method="post">
+        <input type="hidden" name="id" value="{{this.id}}">
+        <input type="submit" value="Excluir">
+      </form>
+    </div>
+  {{/each}}
+</div>
