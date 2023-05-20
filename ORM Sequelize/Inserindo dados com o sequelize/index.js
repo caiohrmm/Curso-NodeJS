@@ -29,6 +29,7 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
+
 app.get("/users/add", (req, res) => {
   res.render("adduser");
 });
@@ -45,14 +46,14 @@ app.post("/users/insert", async (req, res) => {
     isWorking = false;
   }
 
-  console.log(isWorking)
+  console.log(isWorking);
 
   // Aqui farei o INSERT dos dados pelo sequelize
   // Preciso de um await pois assim, eu espero o sequelize inserir meus dados para dar continuidade ao meu fluxo.
   await User.create({ name, occupation, isworking: isWorking });
   // Como é desestruturação, ou eu mando o nome da variavel do mesmo nome que a coluna do banco ou faço a troca por : na funcao.
 
-  res.redirect('/users/add')
+  res.redirect("/users/add");
 });
 
 // Agora, pra eu rodar o meu servidor eu vou depender do OK do banco de dados
