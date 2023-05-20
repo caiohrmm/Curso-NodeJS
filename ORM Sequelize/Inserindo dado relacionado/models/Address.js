@@ -27,6 +27,7 @@ const Address = dbconnection.define("Address", {
 });
 
 // Crio o relacionamento
-Address.belongsTo(User)
+User.hasMany(Address) // Usuario tem muitos enderecos
+Address.belongsTo(User) // Endereço pertence a usuário
 
 module.exports = Address
