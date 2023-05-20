@@ -1,0 +1,13 @@
+<div class="containeru">
+  <div class="item">
+    {{#with user}}
+      <h1>{{name}}</h1>
+      <p>{{occupation}}</p>
+      <a href="users/edit/{{id}}" class="btn">Editar usuário</a>
+      <form action="/users/delete/{{id}}" method="POST">
+        <input type="submit" class="btn-delete" value="Excluir" />
+      </form>
+    {{/with}}
+  </div>
+
+</div>
