@@ -1,0 +1,24 @@
+<h1>Editando uma task: {{task.title}}</h1>
+<form action="/tasks/update" method="POST">
+  {{#with task}}
+    <input type="hidden" name="id" value="{{id}}" />
+    <div class="form-control">
+      <label for="title">Título:</label>
+      <input
+        type="text"
+        name="title"
+        placeholder="O que você vai fazer?"
+        value="{{title}}"
+      />
+    </div>
+    <div class="form-control">
+      <label for="description">Descrição:</label>
+      <textarea
+        type="text"
+        name="description"
+        placeholder="O que você vai fazer?"
+      >{{description}}</textarea>
+    </div>
+    <input type="submit" value="Editar" />
+  {{/with}}
+</form>
