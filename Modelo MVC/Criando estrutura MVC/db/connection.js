@@ -6,4 +6,11 @@ const sequelize = new Sequelize("estruturamvc", "caioh", "caiohenrique@12345", {
   dialect: "mysql",
 });
 
+try {
+  sequelize.authenticate();
+  console.log("Conectado ao banco de dados!");
+} catch (error) {
+  console.log(`Não foi possível conectar ao banco de dados : ${error}`);
+}
+
 module.exports = sequelize;
