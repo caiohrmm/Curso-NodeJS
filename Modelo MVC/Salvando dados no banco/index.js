@@ -12,7 +12,6 @@ app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
 
 // Requirindo os models
-
 const Task = require("./models/Task");
 
 // Ler o body para pegar os valores do formulário
