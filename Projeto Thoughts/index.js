@@ -66,6 +66,7 @@ const dbConnection = require("./db/connection");
 
 // Chamando meus models
 const Thought = require('./models/Thought')
+const User = require('./models/User')
 
 app.get('/', (req,res) => {
   res.render('home')
