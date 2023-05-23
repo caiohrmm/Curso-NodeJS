@@ -24,7 +24,6 @@ app.use(
 app.use(express.json());
 
 // Session middleware - Configurar a sessao do usuário
-
 app.use(
   session({
     name: "session",
@@ -64,6 +63,9 @@ app.use((req, res, next) => {
 
 // Chamar a conexao com o banco
 const dbConnection = require("./db/connection");
+
+// Chamando meus models
+const Thought = require('./models/Thought')
 
 app.get('/', (req,res) => {
   res.render('home')
