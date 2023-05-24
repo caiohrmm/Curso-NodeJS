@@ -60,4 +60,9 @@ module.exports = class AuthController {
       console.log(error);
     }
   }
+  static logout(req, res) {
+    // Irei destruir a sessao do usuário e redirecionar para a tela de login
+    req.session.destroy();
+    res.redirect("/login");
+  }
 };
