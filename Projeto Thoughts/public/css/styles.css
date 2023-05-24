@@ -9,20 +9,19 @@
 
 /* Navbar */
 #logo {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-#logo h1{
-    font-size: 1.8em;
-    cursor: default;
-    transition: .6s;
+#logo h1 {
+  font-size: 1.8em;
+  cursor: default;
+  transition: 0.6s;
 }
 
-#logo h1:hover{
-    color: #f6982d;
+#logo h1:hover {
+  color: #f6982d;
 }
-
 
 #logo img {
   height: 48px;
@@ -60,17 +59,105 @@
 
 /* Container */
 .container {
-    min-height: 70vh;
-    padding: 2em; /*Isso faz com que o footer sempre fique no fim da tela.*/ 
+  min-height: 80vh;
+  padding: 2em 2em 2em 2em; /*Isso faz com que o footer sempre fique no fim da tela.*/
 }
 
 footer {
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top: 1px solid #f6982d;
-    flex-direction: column;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #f6982d;
+  flex-direction: column;
+  cursor: default;
+  font-size: 0.8em;
+}
+
+.auth-container form {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.26);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.auth-container label {
+  display: block;
+  margin-bottom: 2px;
+  font-weight: bold;
+}
+
+.auth-container input[type="text"],
+.auth-container input[type="password"],
+.auth-container input[type="email"] {
+  width: 90%;
+  height: 45px;
+  padding: 10px;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 5px;
+  margin-bottom: 15px;
+  outline: none;
+}
+
+.auth-container input[type="submit"] {
+  background-color: #f6982d;
+  width: 90%;
+  height: 45px;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.auth-container input[type="submit"]:hover {
+  background-color: #d5653e;
+}
+
+.login-link {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.login-link a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.login-link a span{
+    padding-left: 1px;
+    margin-left: 3px;
+    padding-right: 1px;
+    padding-bottom: 1.5px;
+    border-bottom: 1px solid #fff;
+    transition: .5s;
+}
+
+.login-link a span:hover{
+    color: #D2D0D0;
+    border-bottom: 1px solid #D2D0D0;    
+}
+
+.auth-container h2 {
+    transition: .5s;
     cursor: default;
 }
 
+.auth-container h2:hover {
+    color: #f6982d;
+}
