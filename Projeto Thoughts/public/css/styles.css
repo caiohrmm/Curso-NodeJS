@@ -23,6 +23,25 @@
   border-radius: 6px;
   font-size: 0.9em;
 }
+.messagesuccess {
+  padding: 1em;
+  margin: 0 auto 1.8em;
+  text-align: center;
+  max-width: 50%;
+  background-color: #D2D0D0;
+  color: lightgreen;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+.messagesuccess i{
+  background-color: transparent;
+  padding-left: 2px;
+  color: lightgreen;
+
+}
+
+
 
 .message a i{
   background-color: transparent;
