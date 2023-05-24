@@ -29,7 +29,7 @@
   text-align: center;
   max-width: 50%;
   background-color: #D2D0D0;
-  color: lightgreen;
+  color: darkgreen;
   border-radius: 6px;
   font-size: 0.9em;
 }
@@ -37,21 +37,18 @@
 .messagesuccess i{
   background-color: transparent;
   padding-left: 2px;
-  color: lightgreen;
+  color: darkgreen;
 
 }
 
 
 
-.message a i{
+.message i{
   background-color: transparent;
   color: red;
   padding-left: 2px;
 }
 
-.message a{
-  background-color: transparent;
-}
 
 #logo h1 {
   font-size: 1.8em;
