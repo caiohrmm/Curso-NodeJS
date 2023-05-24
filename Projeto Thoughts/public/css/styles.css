@@ -222,13 +222,14 @@ footer {
 
 .dashboard {
   border: 1.5px solid white;
-  width: 50%;
+  width: 70%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   padding: 1em 2em;
   min-height: 40vh;
   border-radius: 10px;
+  box-shadow: 0.2em 0.2em 0.8em #7B7B7B;
 }
 
 .title-container {
@@ -237,6 +238,7 @@ footer {
   flex-basis: 0%;
   text-align: center;
   padding: 1em;
+
 }
 
 .title-container h2 {
@@ -276,6 +278,10 @@ footer {
 
 .dashboard h3 {
   text-align: center;
+  border-bottom: 1px solid white;
+  padding: 1em;
+  margin-bottom: 20px;
+
 }
 
 .back {
@@ -301,4 +307,60 @@ footer {
 .back a:hover {
   color: #d2d0d0;
   border-bottom: 1px solid #d2d0d0;
+}
+
+.thoughts-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.thoughts-container li{
+  list-style: none; 
+  padding: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1.5px solid #f6982d;
+  display: flex;
+  justify-content: space-between;
+}
+
+.thoughts-container li .label{
+  transition: .5s;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+}
+.thoughts-container li .label:hover{
+  color: #f6982d;
+}
+
+.actions a i, .btn-delete i{
+  padding: 10px;
+  border-top: 1.5px solid transparent;
+  margin-left: 10px;
+  transition: .5s;
+}
+
+.btn-delete i {
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.actions i:hover, .btn-delete i:hover{
+  border-top: 1.5px solid #f6982d;
+  color: #d5653e;
+}
+
+.btn-delete {
+  background-color: transparent;
+  border: none;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty {
+  text-align: center;
 }
