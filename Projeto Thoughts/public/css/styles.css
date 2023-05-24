@@ -18,7 +18,7 @@
   margin: 0 auto 1.8em;
   text-align: center;
   max-width: 50%;
-  background-color: #D2D0D0;
+  background-color: #d2d0d0;
   color: red;
   border-radius: 6px;
   font-size: 0.9em;
@@ -28,27 +28,23 @@
   margin: 0 auto 1.8em;
   text-align: center;
   max-width: 50%;
-  background-color: #D2D0D0;
+  background-color: #d2d0d0;
   color: darkgreen;
   border-radius: 6px;
   font-size: 0.9em;
 }
 
-.messagesuccess i{
+.messagesuccess i {
   background-color: transparent;
   padding-left: 2px;
   color: darkgreen;
-
 }
 
-
-
-.message i{
+.message i {
   background-color: transparent;
   color: red;
   padding-left: 2px;
 }
-
 
 #logo h1 {
   font-size: 1.8em;
@@ -87,6 +83,7 @@
   font-size: 0.9em;
   transition: 0.6s;
   padding-bottom: 5px;
+  border-bottom: 1px solid transparent
 }
 
 #navbar ul li a:hover {
@@ -122,14 +119,27 @@ footer {
   width: 100%;
 }
 
-.auth-container {
+.thought-container form {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.auth-container,
+.thought-container {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
-.auth-container label {
+.auth-container label,
+.thought-container label {
   display: block;
   margin-bottom: 2px;
   font-weight: bold;
@@ -147,7 +157,17 @@ footer {
   outline: none;
 }
 
-.auth-container input[type="submit"] {
+.thought-container textarea {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 5px;
+  margin-bottom: 15px;
+  outline: none;
+}
+
+.auth-container input[type="submit"],
+.thought-container input[type="submit"] {
   background-color: #f6982d;
   width: 90%;
   height: 45px;
@@ -159,7 +179,8 @@ footer {
   transition: 0.5s;
 }
 
-.auth-container input[type="submit"]:hover {
+.auth-container input[type="submit"]:hover,
+.thought-container input[type="submit"]:hover {
   background-color: #d5653e;
 }
 
@@ -176,25 +197,108 @@ footer {
   font-weight: 500;
 }
 
-.login-link a span{
-    padding-left: 1px;
-    margin-left: 3px;
-    padding-right: 1px;
-    padding-bottom: 1.5px;
-    border-bottom: 1px solid #fff;
-    transition: .5s;
+.login-link a span {
+  padding-left: 1px;
+  margin-left: 3px;
+  padding-right: 1px;
+  padding-bottom: 1.5px;
+  border-bottom: 1px solid #fff;
+  transition: 0.5s;
 }
 
-.login-link a span:hover{
-    color: #D2D0D0;
-    border-bottom: 1px solid #D2D0D0;    
+.login-link a span:hover {
+  color: #d2d0d0;
+  border-bottom: 1px solid #d2d0d0;
 }
 
 .auth-container h2 {
-    transition: .5s;
-    cursor: default;
+  transition: 0.5s;
+  cursor: default;
 }
 
 .auth-container h2:hover {
-    color: #f6982d;
+  color: #f6982d;
+}
+
+.dashboard {
+  border: 1.5px solid white;
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 1em 2em;
+  min-height: 40vh;
+  border-radius: 10px;
+}
+
+.title-container {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+  text-align: center;
+  padding: 1em;
+}
+
+.title-container h2 {
+  font-size: 1.9em;
+  margin-bottom: 30px;
+  cursor: default;
+  transition: 0.5s;
+}
+
+.title-container h2:hover {
+  color: #f6982d;
+}
+
+.title-container a {
+  text-decoration: none;
+  padding: 10px;
+  border: 1.5px solid darkblue;
+  border-radius: 4px;
+  color: #f6982d;
+  transition: 0.5s;
+}
+
+.title-container a:hover {
+  background-color: #d5653e;
+  color: #fff;
+}
+
+.title-container a i:hover {
+  color: black;
+}
+
+.title-container a i {
+  background-color: transparent;
+  margin-left: 4px;
+  transition: .5s;
+}
+
+.dashboard h3 {
+  text-align: center;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.back a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: .5s;
+    padding-bottom: 1px;
+    border-bottom: 1px solid transparent;
+
+}
+
+.back a:hover {
+  color: #d2d0d0;
+  border-bottom: 1px solid #d2d0d0;
 }

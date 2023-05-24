@@ -9,5 +9,8 @@ module.exports = class ThoughtController {
     static async dashboard(req,res) {
         res.render('thoughts/dashboard')
     }
+    static async createThought(req,res) {
+        res.render('thoughts/create')
+    }
 
 }

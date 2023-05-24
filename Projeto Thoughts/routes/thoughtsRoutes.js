@@ -9,6 +9,7 @@ const ThoughtController = require('../controllers/ThoughtController')
 const checkAuth = require('../helpers/auth').checkAuth
 
 router.get('/dashboard', checkAuth, ThoughtController.dashboard) // O middleware será executado sempre que a rota for acessada.
+router.get('/add', ThoughtController.createThought)
 router.get('/', ThoughtController.showThoughts)
 
 module.exports = router
