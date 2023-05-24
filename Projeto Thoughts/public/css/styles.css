@@ -1,6 +1,76 @@
 * {
-    font-family: 'Plus Jakarta Sans';
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  font-family: "Plus Jakarta Sans";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #222;
+  color: #fff;
 }
+
+/* Navbar */
+#logo {
+    display: flex;
+    align-items: center;
+}
+
+#logo h1{
+    font-size: 1.8em;
+    cursor: default;
+    transition: .6s;
+}
+
+#logo h1:hover{
+    color: #f6982d;
+}
+
+
+#logo img {
+  height: 48px;
+  margin-right: 10px;
+}
+#navbar {
+  padding: 1.2em 1.4em;
+  border-bottom: 1px solid #f6982d;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#navbar ul {
+  display: flex;
+  list-style: none;
+}
+
+#navbar ul li {
+  margin-left: 1.8em;
+}
+
+#navbar ul li a {
+  text-decoration: none;
+  font-size: 0.9em;
+  transition: 0.6s;
+  padding-bottom: 5px;
+}
+
+#navbar ul li a:hover {
+  color: #f6982d;
+  border-bottom: 1px solid #f6982d;
+}
+
+/* Container */
+.container {
+    min-height: 70vh;
+    padding: 2em; /*Isso faz com que o footer sempre fique no fim da tela.*/ 
+}
+
+footer {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #f6982d;
+    flex-direction: column;
+    cursor: default;
+}
+

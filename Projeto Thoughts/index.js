@@ -73,6 +73,7 @@ const thoughtsRoutes = require('./routes/thoughtsRoutes')
 
 app.use('/thoughts', thoughtsRoutes)
 
+// Importei o controller aqui somente para ter acesso a meu /thoughts pelo / somente tb!!
 const ThoughtController = require('./controllers/ThoughtController')
 
 app.get('/', ThoughtController.showThoughts)
