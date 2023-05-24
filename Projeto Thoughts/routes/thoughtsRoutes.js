@@ -13,5 +13,7 @@ router.get('/add', checkAuth, ThoughtController.createThought)
 router.post('/add', checkAuth, ThoughtController.createThoughtSave)
 router.post('/delete', checkAuth, ThoughtController.deleteThought)
 router.get('/', ThoughtController.showThoughts)
+router.get('/edit/:id', ThoughtController.editThought)
+router.post('/edit', ThoughtController.editThoughtUpdate)
 
 module.exports = router
