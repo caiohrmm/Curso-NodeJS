@@ -65,20 +65,20 @@ app.use((req, res, next) => {
 const dbConnection = require("./db/connection");
 
 // Chamando meus models
-const Thought = require('./models/Thought')
-const User = require('./models/User')
+const Thought = require("./models/Thought");
+const User = require("./models/User");
 
 // Chamando minhas rotas
-const thoughtsRoutes = require('./routes/thoughtsRoutes')
-const authRoutes = require('./routes/authRoutes')
+const thoughtsRoutes = require("./routes/thoughtsRoutes");
+const authRoutes = require("./routes/authRoutes");
 
-app.use('/thoughts', thoughtsRoutes)
-app.use('/', authRoutes)
+app.use("/thoughts", thoughtsRoutes);
+app.use("/", authRoutes);
 
 // Importei o controller aqui somente para ter acesso a meu /thoughts pelo / somente tb!!
-const ThoughtController = require('./controllers/ThoughtController')
+const ThoughtController = require("./controllers/ThoughtController");
 
-app.get('/', ThoughtController.showThoughts)
+app.get("/", ThoughtController.showThoughts);
 
 dbConnection
   .sync()
