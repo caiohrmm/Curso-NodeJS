@@ -70,8 +70,10 @@ const User = require('./models/User')
 
 // Chamando minhas rotas
 const thoughtsRoutes = require('./routes/thoughtsRoutes')
+const authRoutes = require('./routes/authRoutes')
 
 app.use('/thoughts', thoughtsRoutes)
+app.use('/', authRoutes)
 
 // Importei o controller aqui somente para ter acesso a meu /thoughts pelo / somente tb!!
 const ThoughtController = require('./controllers/ThoughtController')
