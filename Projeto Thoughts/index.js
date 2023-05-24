@@ -68,9 +68,14 @@ const dbConnection = require("./db/connection");
 const Thought = require('./models/Thought')
 const User = require('./models/User')
 
-app.get('/', (req,res) => {
-  res.render('home')
-})
+// Chamando minhas rotas
+const thoughtsRoutes = require('./routes/thoughtsRoutes')
+
+app.use('/thoughts', thoughtsRoutes)
+
+const ThoughtController = require('./controllers/ThoughtController')
+
+app.get('/', ThoughtController.showThoughts)
 
 dbConnection
   .sync()
