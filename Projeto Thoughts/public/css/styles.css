@@ -13,6 +13,27 @@
   align-items: center;
 }
 
+.message {
+  padding: 1em;
+  margin: 0 auto 1.8em;
+  text-align: center;
+  max-width: 50%;
+  background-color: #D2D0D0;
+  color: red;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+.message a i{
+  background-color: transparent;
+  color: red;
+  padding-left: 2px;
+}
+
+.message a{
+  background-color: transparent;
+}
+
 #logo h1 {
   font-size: 1.8em;
   cursor: default;
