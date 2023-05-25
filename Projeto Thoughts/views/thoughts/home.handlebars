@@ -1,12 +1,36 @@
 <div class="thoughts-containerr">
   <h1>Todos os pensamentos</h1>
+  <form action="/" method="get" class="search">
+    <input type="text" name="search" placeholder="Busque por algo..." />
+    <button type="submit" class="btn">
+      <i class="bi bi-search"></i>
+    </button>
+  </form>
+  <div class="order-container">
+    <span>Ordenar por: </span>
+    <form action="/" method="get">
+      <input type="hidden" name="search" value="{{this.search}}" />
+      <input type="hidden" name="order" value="new" />
+      <button type="submit" class="btn">
+        <i class="bi bi-arrow-up"></i>
+      </button>
+    </form>
+    <form action="/" method="get">
+      <input type="hidden" name="search" value="{{this.search}}" />
+      <input type="hidden" name="order" value="old" />
+      <button type="submit" class="btn">
+        <i class="bi bi-arrow-down"></i>
+      </button>
+    </form>
+    <a href="/">Limpar filtros</a>
+  </div>
   <ul class="thoughts-container">
     {{#each thoughts}}
       <li>
         <span class="label">
           {{this.title}}
         </span>
-        <span>Feito por {{this.User.name}}</span>
+        <span>Feito por <span class="username">{{this.User.name}}</span></span>
       </li>
     {{/each}}
   </ul>
