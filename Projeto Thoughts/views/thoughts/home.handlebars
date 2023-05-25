@@ -1,0 +1,13 @@
+<div class="thoughts-containerr">
+  <h1>Todos os pensamentos</h1>
+  <ul class="thoughts-container">
+    {{#each thoughts}}
+      <li>
+        <span class="label">
+          {{this.title}}
+        </span>
+        <span>Feito por {{this.User.name}}</span>
+      </li>
+    {{/each}}
+  </ul>
+</div>

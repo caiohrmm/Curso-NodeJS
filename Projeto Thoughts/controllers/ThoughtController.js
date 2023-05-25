@@ -5,7 +5,10 @@ const User = require("../models/User");
 
 module.exports = class ThoughtController {
   static async showThoughts(req, res) {
-    res.render("thoughts/home");
+    const thoughtsData = await Thought.findAll({ include: User });
+    const thoughts = thoughtsData.map((result) => result.get({plain: true}));
+    console.log(thoughts)
+    res.render("thoughts/home", { thoughts });
   }
   static async dashboard(req, res) {
     // Funcao da minha dashboard, aqui o usuario será capaz de ver e criar seus pensamentos, editá-los e remove-los.

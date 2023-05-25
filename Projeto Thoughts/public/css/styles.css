@@ -83,7 +83,7 @@
   font-size: 0.9em;
   transition: 0.6s;
   padding-bottom: 5px;
-  border-bottom: 1px solid transparent
+  border-bottom: 1px solid transparent;
 }
 
 #navbar ul li a:hover {
@@ -229,7 +229,7 @@ footer {
   padding: 1em 2em;
   min-height: 40vh;
   border-radius: 10px;
-  box-shadow: 0.2em 0.2em 0.8em #7B7B7B;
+  box-shadow: 0.2em 0.2em 0.8em #7b7b7b;
 }
 
 .title-container {
@@ -238,7 +238,6 @@ footer {
   flex-basis: 0%;
   text-align: center;
   padding: 1em;
-
 }
 
 .title-container h2 {
@@ -273,7 +272,7 @@ footer {
 .title-container a i {
   background-color: transparent;
   margin-left: 4px;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 .dashboard h3 {
@@ -281,7 +280,6 @@ footer {
   border-bottom: 1px solid white;
   padding: 1em;
   margin-bottom: 20px;
-
 }
 
 .back {
@@ -294,14 +292,13 @@ footer {
 }
 
 .back a {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: .5s;
-    padding-bottom: 1px;
-    border-bottom: 1px solid transparent;
-
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: 0.5s;
+  padding-bottom: 1px;
+  border-bottom: 1px solid transparent;
 }
 
 .back a:hover {
@@ -314,8 +311,8 @@ footer {
   flex-direction: column;
 }
 
-.thoughts-container li{
-  list-style: none; 
+.thoughts-container li {
+  list-style: none;
   padding: 10px;
   margin-bottom: 15px;
   border-bottom: 1.5px solid #f6982d;
@@ -323,21 +320,22 @@ footer {
   justify-content: space-between;
 }
 
-.thoughts-container li .label{
-  transition: .5s;
+.thoughts-container li .label {
+  transition: 0.5s;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0%;
 }
-.thoughts-container li .label:hover{
+.thoughts-container li .label:hover {
   color: #f6982d;
 }
 
-.actions a i, .btn-delete i{
+.actions a i,
+.btn-delete i {
   padding: 10px;
   border-top: 1.5px solid transparent;
   margin-left: 10px;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 .btn-delete i {
@@ -345,7 +343,8 @@ footer {
   cursor: pointer;
 }
 
-.actions i:hover, .btn-delete i:hover{
+.actions i:hover,
+.btn-delete i:hover {
   border-top: 1.5px solid #f6982d;
   color: #d5653e;
 }
@@ -363,4 +362,9 @@ footer {
 
 .empty {
   text-align: center;
+}
+
+.thoughts-containerr h1 {
+  text-align: center;
+  margin-bottom: 20px;
 }
