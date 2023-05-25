@@ -1,0 +1,34 @@
+<div class="auth-container">
+  <h2>Criar bolo</h2>
+  <br />
+  <form action="/cakes/create" method="POST">
+
+    <label for="title"></label>
+    <input
+      type="text"
+      name="name"
+      placeholder="Nome do bolo..."
+      required
+      autocomplete="off"
+    />
+
+    <label for="price"></label>
+    <input
+      type="text"
+      name="price"
+      placeholder="Preço do bolo..."
+      required
+      autocomplete="off"
+    />
+
+    <label for="description"></label>
+    <textarea
+      name="description"
+      cols="30"
+      rows="5"
+      placeholder="Descrição do bolo..."
+    ></textarea>
+    <input type="submit" value="Criar bolo" />
+  </form>
+
+</div>
