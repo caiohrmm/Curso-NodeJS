@@ -427,6 +427,11 @@ footer {
   font-size: 1.6em;
 }
 
-.username {
+.color {
   color: #d5653e;
+}
+
+.thoughts-containerr p {
+  text-align: center;
+  font-size: 0.9em;
 }

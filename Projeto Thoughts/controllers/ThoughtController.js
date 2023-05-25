@@ -3,12 +3,36 @@ const Thought = require("../models/Thought");
 const Thoughts = require("../models/Thought");
 const User = require("../models/User");
 
+const { Op } = require("sequelize");
+// O op é o operador que me permite fazer buscar mais avancadas com sequelize -> LIKE
+
 module.exports = class ThoughtController {
   static async showThoughts(req, res) {
-    const thoughtsData = await Thought.findAll({ include: User });
-    const thoughts = thoughtsData.map((result) => result.get({plain: true}));
-    console.log(thoughts)
-    res.render("thoughts/home", { thoughts });
+    // Criando funcao de busca
+    let search = ""; // Precisa ser let pois sempre irei mudar seu valor.
+
+    if (req.query.search) {
+      search = req.query.search;
+    }
+    // Pega o parametro ?search que é disparado na url
+
+    const thoughtsData = await Thought.findAll({
+      include: User,
+      where: {
+        title: { [Op.like]: `%${search}%` },
+      },
+      // Se tiver alguma coisa em search, ele me tras os dados filtrados, caso contrario tras normal
+    });
+    const thoughts = thoughtsData.map((result) => result.get({ plain: true }));
+
+    // Contador de pensamentos, mostrará quantos pensamentos existem no filtro ou no total
+    let thoughtsQty = thoughts.length;
+
+    if (thoughtsQty === 0) {
+      thoughtsQty = false;
+    }
+
+    res.render("thoughts/home", { thoughts, search, thoughtsQty });
   }
   static async dashboard(req, res) {
     // Funcao da minha dashboard, aqui o usuario será capaz de ver e criar seus pensamentos, editá-los e remove-los.
