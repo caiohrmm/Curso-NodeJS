@@ -16,11 +16,21 @@ module.exports = class ThoughtController {
     }
     // Pega o parametro ?search que é disparado na url
 
+    let order = "DESC";
+
+    if (req.query.order === "old") {
+      order = "ASC";
+    } else {
+      order = "DESC";
+    }
+
     const thoughtsData = await Thought.findAll({
       include: User,
       where: {
         title: { [Op.like]: `%${search}%` },
       },
+      order: [["createdAt", order]],
+      
       // Se tiver alguma coisa em search, ele me tras os dados filtrados, caso contrario tras normal
     });
     const thoughts = thoughtsData.map((result) => result.get({ plain: true }));
