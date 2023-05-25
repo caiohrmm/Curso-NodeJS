@@ -1,0 +1,40 @@
+* {
+  font-family: "Plus Jakarta Sans";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #DADADA;
+  color: #fff;
+}
+
+#navbar {
+  padding: 1.2em 1.4em;
+  border-bottom: 1px solid #45A49B;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+#navbar ul {
+  display: flex;
+  list-style: none;
+}
+
+#navbar ul li {
+  margin-left: 1.8em;
+}
+
+#navbar ul li a {
+  text-decoration: none;
+  font-size: 1em;
+  transition: 0.6s;
+  padding-bottom: 5px;
+  border-bottom: 1px solid transparent;
+}
+
+#navbar ul li a:hover {
+  color: #45A49B;
+  border-bottom: 1px solid #45A49B;
+}
