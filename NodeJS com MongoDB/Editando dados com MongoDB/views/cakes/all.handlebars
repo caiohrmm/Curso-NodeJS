@@ -1,0 +1,15 @@
+<h1 style="text-align: center;">Todos os bolos</h1>
+<div class="cakes">
+    {{#each cakes}}
+    <div class="cake">
+        <img src="{{this.image}}" alt="{{this.name}}">
+        <h3>{{this.name}}</h3>
+        <p>{{this.price}} Reais</p>
+        <a href="/cakes/{{this._id}}" class="link">Ver bolo</a>
+        <form action="/cakes/delete/{{this._id}}" method="post">
+            <input type="submit" class="btn" value="Excluir">
+        </form>
+        <a href="/cakes/edit/{{this._id}}" class="btn">Editar</a>
+    </div>
+    {{/each}}
+</div>
