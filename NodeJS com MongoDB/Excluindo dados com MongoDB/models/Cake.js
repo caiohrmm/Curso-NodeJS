@@ -40,8 +40,11 @@ class Cake {
     return cake;
   }
 
-  static async deleteCake() {
-    
+  static async deleteCakeById(id) {
+    const objectId = new ObjectId(id);
+    await connection.db().collection("cakes").deleteOne({ _id: objectId });
+
+    return;
   }
 }
 
