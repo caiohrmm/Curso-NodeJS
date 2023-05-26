@@ -1,0 +1,48 @@
+<div class="auth-container">
+  <h2>Criar bolo</h2>
+  <br />
+  <form action="/cakes/edit" method="POST">
+    {{#with cake}}
+      <input type="hidden" name="id" value="{{_id}}" />
+      <label for="name"></label>
+      <input
+        value="{{name}}"
+        type="text"
+        name="name"
+        placeholder="Nome do bolo..."
+        required
+        autocomplete="off"
+      />
+
+      <label for="price"></label>
+      <input
+        value="{{price}}"
+        type="text"
+        name="price"
+        placeholder="Preço do bolo..."
+        required
+        autocomplete="off"
+      />
+
+      <label for="image"></label>
+      <input
+        value="{{image}}"
+        type="text"
+        name="image"
+        placeholder="URL da imagem..."
+        required
+        autocomplete="off"
+      />
+
+      <label for="description"></label>
+      <textarea
+        name="description"
+        cols="30"
+        rows="5"
+        placeholder="Descrição do bolo..."
+      >{{description}}</textarea>
+    {{/with}}
+    <input type="submit" value="Editar bolo" />
+  </form>
+
+</div>
