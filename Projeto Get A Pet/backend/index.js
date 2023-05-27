@@ -22,6 +22,7 @@ app.use(
 app.use(express.static('public'))
 
 // Rotas
-
+const UserRoutes = require('./routes/UserRoutes.js')
+app.use('/users', UserRoutes)
 
 app.listen(port,() => console.log(`API rodando na porta: ${port}`))
