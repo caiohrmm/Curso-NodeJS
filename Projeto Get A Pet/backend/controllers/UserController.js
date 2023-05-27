@@ -4,6 +4,9 @@ const bcrypt = require("bcrypt");
 
 const User = require("../models/User");
 
+// Importando o token
+const createUserToken = require("../helpers/crete-user-token");
+
 module.exports = class UserController {
   static async register(req, res) {
     // Criando a funcao de registro
@@ -83,10 +86,8 @@ module.exports = class UserController {
     try {
       // Inserindo usuario no banco!
       const newUser = await user.save();
-      res.status(201).json({
-        message: "O usuário foi criado com sucesso!",
-        newUser,
-      });
+      await createUserToken(newUser, req, res);
+
     } catch (error) {
       res.status(500).json({ message: error });
     }
