@@ -87,9 +87,56 @@ module.exports = class UserController {
       // Inserindo usuario no banco!
       const newUser = await user.save();
       await createUserToken(newUser, req, res);
-
     } catch (error) {
       res.status(500).json({ message: error });
     }
+  }
+
+
+
+  static async login(req, res) {
+    // Funcao de login do usuario
+
+    const { email, password } = req.body;
+
+    // Validacoes
+    if (!email) {
+      res.status(422).json({
+        message: "O e-mail é obrigatório",
+      });
+      return;
+    }
+
+    if (!password) {
+      res.status(422).json({
+        message: "A senha é obrigatória",
+      });
+      return;
+    }
+    // Checkar se o email que o usuario esta cadastrando ja existe no meu banco de dados.
+    const user = await User.findOne({ email }); // email : email
+
+    if (!user) {
+      res.status(422).json({
+        message:
+          "Este usuário não existe em nosso banco de dados! Por favor, utilize um e-mail válido.",
+      });
+      return;
+    }
+
+    // Checkar se a senha vai dar match com a do banco
+    const checkPassword = await bcrypt.compare(password, user.password);
+    // Comparo a senha crua que o usuário passou no body com a senha criptografada do banco.
+
+    if (!checkPassword) {
+      res.status(422).json({
+        message:
+          "Senha inválida!",
+      });
+      return;
+    }
+
+    // Se passou por todas as validacoes, agora é só logar o usuario pelo middleware
+    await createUserToken(user, req, res)
   }
 };
