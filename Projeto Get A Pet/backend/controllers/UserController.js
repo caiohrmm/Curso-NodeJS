@@ -2,10 +2,15 @@ const connection = require("../db/connection");
 
 const bcrypt = require("bcrypt");
 
+const jwt = require("jsonwebtoken");
+
 const User = require("../models/User");
 
 // Importando o token
 const createUserToken = require("../helpers/crete-user-token");
+
+// Importando helper de pegar o token
+const getToken = require('../helpers/get-token')
 
 module.exports = class UserController {
   static async register(req, res) {
@@ -92,8 +97,6 @@ module.exports = class UserController {
     }
   }
 
-
-
   static async login(req, res) {
     // Funcao de login do usuario
 
@@ -130,13 +133,33 @@ module.exports = class UserController {
 
     if (!checkPassword) {
       res.status(422).json({
-        message:
-          "Senha inválida!",
+        message: "Senha inválida!",
       });
       return;
     }
 
     // Se passou por todas as validacoes, agora é só logar o usuario pelo middleware
-    await createUserToken(user, req, res)
+    await createUserToken(user, req, res);
+  }
+
+  static async checkUser(req, res) {
+    // Agora preciso criar uma rota get que verificará o usuario pelo Token dele.
+
+    let currentUser; //usuario atual
+
+    if (req.headers.authorization) { // Se eu tiver um token eu caio nesse if
+        const token = getToken(req)
+        const decoded = jwt.verify(token, 'meusecretdificildemais123')
+
+        console.log(decoded)
+        currentUser = await User.findById(decoded.id)
+
+        currentUser.password = undefined
+
+    } else {
+      currentUser = null;
+    }
+
+    res.status(200).send(currentUser);
   }
 };
