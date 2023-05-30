@@ -166,7 +166,7 @@ module.exports = class UserController {
   static async getUserById(req, res) {
     const id = req.params.id;
 
-    const user = await User.findById(id).select('-password');
+    const user = await User.findById(id).select("-password");
 
     if (!user) {
       res.status(422).json({
@@ -176,5 +176,11 @@ module.exports = class UserController {
     } else {
       res.status(200).json({ user });
     }
+  }
+
+  static async editUser(req, res) {
+    res.status(200).json({
+      message: "Deu certo!",
+    });
   }
 };
