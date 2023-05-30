@@ -10,7 +10,7 @@ const User = require("../models/User");
 const createUserToken = require("../helpers/crete-user-token");
 
 // Importando helper de pegar o token
-const getToken = require('../helpers/get-token')
+const getToken = require("../helpers/get-token");
 
 module.exports = class UserController {
   static async register(req, res) {
@@ -147,19 +147,34 @@ module.exports = class UserController {
 
     let currentUser; //usuario atual
 
-    if (req.headers.authorization) { // Se eu tiver um token eu caio nesse if
-        const token = getToken(req)
-        const decoded = jwt.verify(token, 'meusecretdificildemais123')
+    if (req.headers.authorization) {
+      // Se eu tiver um token eu caio nesse if
+      const token = getToken(req);
+      const decoded = jwt.verify(token, "meusecretdificildemais123");
 
-        console.log(decoded)
-        currentUser = await User.findById(decoded.id)
+      console.log(decoded);
+      currentUser = await User.findById(decoded.id);
 
-        currentUser.password = undefined
-
+      currentUser.password = undefined;
     } else {
       currentUser = null;
     }
 
     res.status(200).send(currentUser);
+  }
+
+  static async getUserById(req, res) {
+    const id = req.params.id;
+
+    const user = await User.findById(id).select('-password');
+
+    if (!user) {
+      res.status(422).json({
+        message: "Usuário não encontrado!",
+      });
+      return;
+    } else {
+      res.status(200).json({ user });
+    }
   }
 };
