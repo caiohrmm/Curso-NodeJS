@@ -182,7 +182,6 @@ module.exports = class UserController {
   }
 
   static async editUser(req, res) {
-
     const { name, email, phone, password, confirmpassword } = req.body;
 
     // Checkando se o usuario existe
@@ -199,6 +198,8 @@ module.exports = class UserController {
       return;
     }
 
+    user.name = name;
+
     // Se veio um email, preciso de outra validacao, pois o email editado pode ser de alguem do sistema.
     if (!email) {
       res.status(422).json({
@@ -209,25 +210,26 @@ module.exports = class UserController {
     // Check email
     const emailExists = await User.findOne({ email });
 
-    if (email === emailExists.email && emailExists) {
+    if (email !== user.email && emailExists) {
       res.status(422).json({
         message: "Esse e-mail já está cadastrado no nosso sistema!",
       });
       return;
     }
+    user.email = email;
 
-    if (!password) {
+    // Verificar se a senha do campo password e confirmpassword sao identicas
+    if (password !== confirmpassword) {
       res.status(422).json({
-        message: "A senha é obrigatória",
+        message: "As senhas não são iguais!",
       });
       return;
-    }
-
-    if (!confirmpassword) {
-      res.status(422).json({
-        message: "A confirmação de senha é obrigatória",
-      });
-      return;
+    } else if (password === confirmpassword && password != null) {
+      // Se a senha for igual a senha confirmada e a senha for diferente de nula, eu crio uma nova senha.
+      // Criando senha criptografada
+      const salt = await bcrypt.genSalt(12); // Adiciona mais 12 caracteres para a senha
+      const passwordHash = await bcrypt.hash(password, salt);
+      user.password = passwordHash;
     }
 
     if (!phone) {
@@ -236,23 +238,30 @@ module.exports = class UserController {
       });
       return;
     }
-    // Valido todos os dados para prosseguir com mais validacoes
+    user.phone = phone;
 
-    // Verificar se a senha do campo password e confirmpassword sao identicas
-    if (password !== confirmpassword) {
-      res.status(422).json({
-        message: "As senhas não são iguais!",
+    try {
+      // Atualizar o usuario com o user que criamos acima
+      await User.findOneAndUpdate(
+        {
+          _id: user._id,
+        },
+        {
+          $set: user,
+        },
+        {
+          new: true,
+        }
+      );
+
+      res.status(200).json({
+        message: "Usuário atualizado com sucesso!",
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: error,
       });
       return;
     }
-
-    if (!user) {
-      res.status(422).json({
-        message: "Usuário não encontrado!",
-      });
-      return;
-    }
-
-    // Se passou na validação é porque ele existe
   }
 };
