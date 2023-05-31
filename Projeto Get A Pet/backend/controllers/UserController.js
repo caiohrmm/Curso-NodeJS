@@ -12,6 +12,9 @@ const createUserToken = require("../helpers/crete-user-token");
 // Importando helper de pegar o token
 const getToken = require("../helpers/get-token");
 
+// Importando helper de pegar um usuario pelo token
+const getUserByToken = require("../helpers/get-user-by-token");
+
 module.exports = class UserController {
   static async register(req, res) {
     // Criando a funcao de registro
@@ -179,8 +182,77 @@ module.exports = class UserController {
   }
 
   static async editUser(req, res) {
-    res.status(200).json({
-      message: "Deu certo!",
-    });
+
+    const { name, email, phone, password, confirmpassword } = req.body;
+
+    // Checkando se o usuario existe
+    const token = getToken(req); // Pega o token do usuário
+    const user = await getUserByToken(token);
+
+    let image = "";
+
+    // Validação dos dados, igual na do registro.
+    if (!name) {
+      res.status(422).json({
+        message: "O nome é obrigatório",
+      });
+      return;
+    }
+
+    // Se veio um email, preciso de outra validacao, pois o email editado pode ser de alguem do sistema.
+    if (!email) {
+      res.status(422).json({
+        message: "O e-mail é obrigatório",
+      });
+      return;
+    }
+    // Check email
+    const emailExists = await User.findOne({ email });
+
+    if (email === emailExists.email && emailExists) {
+      res.status(422).json({
+        message: "Esse e-mail já está cadastrado no nosso sistema!",
+      });
+      return;
+    }
+
+    if (!password) {
+      res.status(422).json({
+        message: "A senha é obrigatória",
+      });
+      return;
+    }
+
+    if (!confirmpassword) {
+      res.status(422).json({
+        message: "A confirmação de senha é obrigatória",
+      });
+      return;
+    }
+
+    if (!phone) {
+      res.status(422).json({
+        message: "O telefone é obrigatório",
+      });
+      return;
+    }
+    // Valido todos os dados para prosseguir com mais validacoes
+
+    // Verificar se a senha do campo password e confirmpassword sao identicas
+    if (password !== confirmpassword) {
+      res.status(422).json({
+        message: "As senhas não são iguais!",
+      });
+      return;
+    }
+
+    if (!user) {
+      res.status(422).json({
+        message: "Usuário não encontrado!",
+      });
+      return;
+    }
+
+    // Se passou na validação é porque ele existe
   }
 };
