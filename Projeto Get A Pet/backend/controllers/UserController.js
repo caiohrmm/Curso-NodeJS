@@ -188,7 +188,9 @@ module.exports = class UserController {
     const token = getToken(req); // Pega o token do usuário
     const user = await getUserByToken(token);
 
-    let image = "";
+    if (req.file) {
+      user.image = req.file.filename;
+    }
 
     // Validação dos dados, igual na do registro.
     if (!name) {

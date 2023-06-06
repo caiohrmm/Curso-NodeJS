@@ -23,6 +23,9 @@ app.use(express.static('public'))
 
 // Rotas
 const UserRoutes = require('./routes/UserRoutes.js')
+const PetRoutes = require('./routes/PetRoutes.js')
+
 app.use('/users', UserRoutes)
+app.use('/pets', PetRoutes)
 
 app.listen(port,() => console.log(`API rodando na porta: ${port}`))
