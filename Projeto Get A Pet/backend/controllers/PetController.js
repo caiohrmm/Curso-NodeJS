@@ -64,7 +64,7 @@ module.exports = class PetController {
       available,
       images: [],
       user: {
-        _id: user.id,
+        _id: user._id,
         name: user.name,
         image: user.image,
         phone: user.phone,
@@ -86,5 +86,28 @@ module.exports = class PetController {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  static async getAllPets(req, res) {
+    // Funcao que vai para a rota de GET para ver todos os PETS do sistema.
+
+    const pets = await Pet.find().sort("-createdAt"); // Pega os pets dos mais novos para os mais velhos.
+
+    res.status(200).json({
+      message: pets,
+    });
+  }
+
+  static async getAllUserPets(req, res) {
+    // Funcao que vai pegar os pets do usuario do banco.
+
+    const token = getToken(req);
+    const user = await getUserByToken(token); // Pegando meu usuario baseado no token.
+
+    const pets = await Pet.find({ 'user._id': user.id }).sort("-createdAt");
+    // Quando preciso filtrar algum dado de um subdocument do MongoDB eu filtro por ''.
+    res.status(200).json({
+      message: pets,
+    });
   }
 };

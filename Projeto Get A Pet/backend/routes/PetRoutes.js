@@ -7,6 +7,20 @@ const { imageUpload } = require("../helpers/image-upload");
 // Controller
 const PetController = require("../controllers/PetController");
 
-router.post("/create", verifyToken, imageUpload.array('images'), PetController.create);
+// Rota para criar um novo pet
+router.post(
+  "/create",
+  verifyToken,
+  imageUpload.array("images"),
+  PetController.create
+);
+
+// Rota para ver todos os pets do sistema, nao precisa de autenticação
+router.get('/', PetController.getAllPets)
+
+// Rota para ver os pets que um usuario tem
+router.get('/mypets', verifyToken, PetController.getAllUserPets)
+
+
 
 module.exports = router;
