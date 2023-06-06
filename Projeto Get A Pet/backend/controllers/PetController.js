@@ -1,5 +1,8 @@
 const Pet = require("../models/Pet");
 
+const getToken = require("../helpers/get-token");
+const getUserByToken = require("../helpers/get-user-by-token");
+
 module.exports = class PetController {
   // Criando um pet
   static async create(req, res) {
@@ -37,6 +40,38 @@ module.exports = class PetController {
         message: "A cor é obrigatória!",
       });
       return;
+    }
+
+    // Pegar o dono do usuário
+    const token = getToken(req);
+    const user = await getUserByToken(token); 
+    // Espero o usuário chegar e sigo com a criacao do pet.
+
+    // Se passar nas validacoes, eu crio o pet
+    const pet = new Pet({
+      name,
+      age,
+      weight,
+      color,
+      available,
+      images: [],
+      user: {
+        _id: user.id,
+        name: user.name,
+        image: user.image,
+        phone: user.phone,
+      },
+    });
+
+    // Salvando o pet no banco
+    try {
+      const newPet = await pet.save();
+      res.status(201).json({
+        message: "Pet cadastrado com sucesso.",
+        newPet,
+      });
+    } catch (error) {
+      console.log(error);
     }
   }
 };
