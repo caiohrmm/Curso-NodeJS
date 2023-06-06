@@ -10,6 +10,8 @@ module.exports = class PetController {
 
     const { name, weight, color, age } = req.body;
 
+    const images = req.files;
+
     // Toda vez que um pet for cadastrado, ele ficará disponivel, esse recurso so será trocado na edicao.
     const available = true;
 
@@ -42,9 +44,15 @@ module.exports = class PetController {
       return;
     }
 
+    if (images.length === 0) {
+      res.status(422).json({
+        message: "A imagem é obrigatória!",
+      });
+    }
+
     // Pegar o dono do usuário
     const token = getToken(req);
-    const user = await getUserByToken(token); 
+    const user = await getUserByToken(token);
     // Espero o usuário chegar e sigo com a criacao do pet.
 
     // Se passar nas validacoes, eu crio o pet
@@ -61,6 +69,11 @@ module.exports = class PetController {
         image: user.image,
         phone: user.phone,
       },
+    });
+
+    // Percorrer o array de imagens para renomeá-las com o nome que eu quero.
+    images.map((image) => {
+      pet.images.push(image.filename);
     });
 
     // Salvando o pet no banco
