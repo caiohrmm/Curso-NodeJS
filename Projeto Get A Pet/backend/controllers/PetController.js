@@ -138,7 +138,7 @@ module.exports = class PetController {
       });
       return;
     }
-    // Checkar se existe um pet no id 
+    // Checkar se existe um pet no id
     const pet = await Pet.findOne({ _id: id });
 
     if (!pet) {
@@ -149,7 +149,57 @@ module.exports = class PetController {
     }
 
     res.status(200).json({
-      pet
-    })
+      pet,
+    });
+  }
+
+  static async deletePetById(req, res) {
+    const id = req.params.id;
+
+    // Verifica se existe esse ID no banco.
+    if (!ObjectId.isValid(id)) {
+      res.status(422).json({
+        message: "ID Inválido!",
+      });
+      return;
+    }
+
+    // Checkar se existe um pet no id
+    const pet = await Pet.findOne({ _id: id });
+
+    if (!pet) {
+      res.status(404).json({
+        message: "Não existe nenhum pet cadastrado com esse ID!!",
+      });
+      return;
+    }
+
+    // Checkar se o usuario que está logado registrou o pet
+
+    const token = getToken(req);
+    const user = await getUserByToken(token);
+
+    // Fazer uma comparacao se o id do usuario está cadastrado no subdocument do pet.
+
+    console.log(user.id)
+    console.log(pet.user._id)
+    if (user.id !== pet.user._id.toString()) {
+      res.status(404).json({
+        message:
+          "Houve um problema parar processar a remoção! Tente novamente.",
+      });
+      return;
+    }
+
+   
+
+    try {
+      await Pet.findByIdAndDelete(id);
+      res.status(200).json({
+        message: `O pet ${pet.name} foi removido com sucesso!`
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 };

@@ -16,15 +16,18 @@ router.post(
 );
 
 // Rota para ver todos os pets do sistema, nao precisa de autenticação
-router.get('/', PetController.getAllPets)
+router.get("/", PetController.getAllPets);
 
 // Rota para ver os pets que um usuario tem
-router.get('/mypets', verifyToken, PetController.getAllUserPets)
+router.get("/mypets", verifyToken, PetController.getAllUserPets);
 
 // Rota que exibe os pets que estou querendo adotar
-router.get('/myadoptions', verifyToken, PetController.getAllUserAdoptions)
+router.get("/myadoptions", verifyToken, PetController.getAllUserAdoptions);
 
 // Rota que exibe os pets individualmente para marcar visita.
-router.get('/:id', PetController.getPetById)
+router.get("/:id", PetController.getPetById);
+
+// Rota para deletar o pet
+router.delete("/:id", verifyToken, PetController.deletePetById);
 
 module.exports = router;
