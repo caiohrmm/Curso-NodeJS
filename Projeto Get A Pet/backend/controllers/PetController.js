@@ -181,8 +181,8 @@ module.exports = class PetController {
 
     // Fazer uma comparacao se o id do usuario está cadastrado no subdocument do pet.
 
-    console.log(user.id)
-    console.log(pet.user._id)
+    console.log(user.id);
+    console.log(pet.user._id);
     if (user.id !== pet.user._id.toString()) {
       res.status(404).json({
         message:
@@ -191,15 +191,105 @@ module.exports = class PetController {
       return;
     }
 
-   
-
     try {
       await Pet.findByIdAndDelete(id);
       res.status(200).json({
-        message: `O pet ${pet.name} foi removido com sucesso!`
+        message: `O pet ${pet.name} foi removido com sucesso!`,
       });
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  static async updatePetById(req, res) {
+    // Funcao que irá atualizar o pet baseado no id
+    const id = req.params.id;
+
+    // Verifica se existe esse ID no banco.
+    if (!ObjectId.isValid(id)) {
+      res.status(422).json({
+        message: "ID Inválido!",
+      });
+      return;
+    }
+
+    const { name, weight, color, age, available } = req.body;
+
+    const images = req.files;
+
+    const updatedData = {};
+
+    const pet = await Pet.findOne({ _id: id });
+
+    if (!pet) {
+      res.status(404).json({
+        message: "Pet não encontrado!",
+      });
+    }
+
+    const token = getToken(req);
+    const user = await getUserByToken(token);
+
+    if (user.id !== pet.user._id.toString()) {
+      res.status(404).json({
+        message: "Houve um problema parar processar a edição! Tente novamente.",
+      });
+      return;
+    }
+
+    if (!name) {
+      res.status(422).json({
+        message: "O nome é obrigatório!",
+      });
+      return;
+    } else {
+      updatedData.name = name;
+    }
+
+    if (!weight) {
+      res.status(422).json({
+        message: "O peso é obrigatório!",
+      });
+      return;
+    } else {
+      updatedData.weight = weight;
+    }
+    if (!age) {
+      res.status(422).json({
+        message: "A idade é obrigatória!",
+      });
+      return;
+    } else {
+      updatedData.age = age;
+    }
+    if (!color) {
+      res.status(422).json({
+        message: "A cor é obrigatória!",
+      });
+      return;
+    } else {
+      updatedData.color = color;
+    }
+
+    if (images.length === 0) {
+      res.status(422).json({
+        message: "A imagem é obrigatória!",
+      });
+    } else {
+      updatedData.images = [];
+      images.map((image) => {
+        updatedData.images.push(image.filename);
+      });
+    }
+
+    // Se passar por todas as validações ele atualiza o pet
+    try {
+      await Pet.findByIdAndUpdate(id, updatedData);
+      res
+        .status(200)
+        .json({ message: `O pet ${pet.name} foi atualizado com sucesso.` });
+    } catch (error) {
+      console.log(error)
     }
   }
 };
