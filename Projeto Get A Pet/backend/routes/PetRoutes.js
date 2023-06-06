@@ -21,6 +21,10 @@ router.get('/', PetController.getAllPets)
 // Rota para ver os pets que um usuario tem
 router.get('/mypets', verifyToken, PetController.getAllUserPets)
 
+// Rota que exibe os pets que estou querendo adotar
+router.get('/myadoptions', verifyToken, PetController.getAllUserAdoptions)
 
+// Rota que exibe os pets individualmente para marcar visita.
+router.get('/:id', PetController.getPetById)
 
 module.exports = router;

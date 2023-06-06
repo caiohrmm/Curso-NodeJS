@@ -3,6 +3,8 @@ const Pet = require("../models/Pet");
 const getToken = require("../helpers/get-token");
 const getUserByToken = require("../helpers/get-user-by-token");
 
+const ObjectId = require("mongoose").Types.ObjectId;
+
 module.exports = class PetController {
   // Criando um pet
   static async create(req, res) {
@@ -104,10 +106,50 @@ module.exports = class PetController {
     const token = getToken(req);
     const user = await getUserByToken(token); // Pegando meu usuario baseado no token.
 
-    const pets = await Pet.find({ 'user._id': user.id }).sort("-createdAt");
+    const pets = await Pet.find({ "user._id": user.id }).sort("-createdAt");
+
     // Quando preciso filtrar algum dado de um subdocument do MongoDB eu filtro por ''.
     res.status(200).json({
       message: pets,
     });
+  }
+
+  static async getAllUserAdoptions(req, res) {
+    // Funcao que vai pegar os pets que o usuario deseja adotard
+
+    const token = getToken(req);
+    const user = await getUserByToken(token); // Pegando meu usuario baseado no token.
+
+    const pets = await Pet.find({ "adopter._id": user.id }).sort("-createdAt");
+
+    // Quando preciso filtrar algum dado de um subdocument do MongoDB eu filtro por ''.
+    res.status(200).json({
+      message: pets,
+    });
+  }
+
+  static async getPetById(req, res) {
+    const id = req.params.id;
+
+    // Verifica se existe esse ID no banco.
+    if (!ObjectId.isValid(id)) {
+      res.status(422).json({
+        message: "ID Inválido!",
+      });
+      return;
+    }
+    // Checkar se existe um pet no id 
+    const pet = await Pet.findOne({ _id: id });
+
+    if (!pet) {
+      res.status(404).json({
+        message: "Não existe nenhum pet cadastrado com esse ID!!",
+      });
+      return;
+    }
+
+    res.status(200).json({
+      pet
+    })
   }
 };
