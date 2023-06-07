@@ -287,9 +287,9 @@ module.exports = class PetController {
       await Pet.findByIdAndUpdate(id, updatedData);
       res
         .status(200)
-        .json({ message: `O pet ${pet.name} foi atualizado com sucesso.` });
+        .json({ message: `O pet foi atualizado com sucesso.` });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 };

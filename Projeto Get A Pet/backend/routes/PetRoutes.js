@@ -31,7 +31,7 @@ router.get("/:id", PetController.getPetById);
 router.delete("/:id", verifyToken, PetController.deletePetById);
 
 // Rota para atualizar o pet
-router.patch('/:id', verifyToken, imageUpload, PetController.updatePetById)
+router.patch('/:id', verifyToken, imageUpload.array('images'), PetController.updatePetById)
 
 
 module.exports = router;
