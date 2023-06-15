@@ -3,6 +3,7 @@
   margin: 0;
   font-family: "Poppins";
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 
@@ -13,6 +14,10 @@ h1 {
 }
 
 .bold {
-  font-weight: 900;
+  font-weight: bold;
   color: #16379d;
+}
+
+.container {
+  height: 80vh;
 }
