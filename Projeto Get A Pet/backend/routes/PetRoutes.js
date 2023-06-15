@@ -33,5 +33,7 @@ router.delete("/:id", verifyToken, PetController.deletePetById);
 // Rota para atualizar o pet
 router.patch('/:id', verifyToken, imageUpload.array('images'), PetController.updatePetById)
 
+// Rota para agendar consulta com o dono do pet para adoção
+router.patch('/schedule/:id', verifyToken, PetController.schedule)
 
 module.exports = router;

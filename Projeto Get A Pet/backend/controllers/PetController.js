@@ -285,11 +285,59 @@ module.exports = class PetController {
     // Se passar por todas as validações ele atualiza o pet
     try {
       await Pet.findByIdAndUpdate(id, updatedData);
-      res
-        .status(200)
-        .json({ message: `O pet foi atualizado com sucesso.` });
+      res.status(200).json({ message: `O pet foi atualizado com sucesso.` });
     } catch (error) {
       console.log(error);
     }
+  }
+
+  static async schedule(req, res) {
+    const id = req.params.id;
+
+    // Checkar se o pet existe!
+    const pet = await Pet.findOne({ _id: id });
+
+    if (!pet) {
+      res.status(404).json({
+        message: "Pet não encontrado!",
+      });
+      return
+    }
+
+    // Verificar se o pet é meu. Não posso marcar visita para meu próprio pet!
+    const token = getToken(req);
+    const user = await getUserByToken(token);
+
+    if (user.id === pet.user._id.toString() /* pet.user._id.equals(user.id) */) {
+      res.status(422).json({
+        message: "Você não pode agendar uma visita para seu próprio pet !",
+      });
+      return;
+    }
+
+    // Checkar se o usuário que está querendo a visita, já agendou uma visita
+    if (pet.adopter) {
+      if (pet.adopter._id.equals(user.id)) {
+        res.status(422).json({
+          message: "Você já agendou uma visita para esse Pet!"
+        })
+        return
+      }
+    }
+
+    // Se passou por todas as validações, eu adicionarei o usuário como adotante do pet!
+    pet.adopter = {
+      _id: user.id,
+      name: user.name,
+      image: user.image,
+    }
+
+    await Pet.findByIdAndUpdate(id, pet)
+
+    res.status(200).json({
+      message: `A visita foi cadastrada com sucesso, entre em contato com ${pet.user.name} no telefone ${pet.user.phone}`
+    })
+
+    
   }
 };
