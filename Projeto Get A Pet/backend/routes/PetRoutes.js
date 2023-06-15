@@ -36,4 +36,6 @@ router.patch('/:id', verifyToken, imageUpload.array('images'), PetController.upd
 // Rota para agendar consulta com o dono do pet para adoção
 router.patch('/schedule/:id', verifyToken, PetController.schedule)
 
+router.patch('/conclude/:id', verifyToken, PetController.concludeAdoption)
+
 module.exports = router;

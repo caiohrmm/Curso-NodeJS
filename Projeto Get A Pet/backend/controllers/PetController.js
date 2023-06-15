@@ -301,14 +301,16 @@ module.exports = class PetController {
       res.status(404).json({
         message: "Pet não encontrado!",
       });
-      return
+      return;
     }
 
     // Verificar se o pet é meu. Não posso marcar visita para meu próprio pet!
     const token = getToken(req);
     const user = await getUserByToken(token);
 
-    if (user.id === pet.user._id.toString() /* pet.user._id.equals(user.id) */) {
+    if (
+      user.id === pet.user._id.toString() /* pet.user._id.equals(user.id) */
+    ) {
       res.status(422).json({
         message: "Você não pode agendar uma visita para seu próprio pet !",
       });
@@ -319,9 +321,9 @@ module.exports = class PetController {
     if (pet.adopter) {
       if (pet.adopter._id.equals(user.id)) {
         res.status(422).json({
-          message: "Você já agendou uma visita para esse Pet!"
-        })
-        return
+          message: "Você já agendou uma visita para esse Pet!",
+        });
+        return;
       }
     }
 
@@ -330,14 +332,47 @@ module.exports = class PetController {
       _id: user.id,
       name: user.name,
       image: user.image,
+      phone: user.phone,
+    };
+
+    await Pet.findByIdAndUpdate(id, pet);
+
+    res.status(200).json({
+      message: `A visita foi cadastrada com sucesso, entre em contato com ${pet.user.name} no telefone ${pet.user.phone}`,
+    });
+  }
+
+  static async concludeAdoption(req, res) {
+    const id = req.params.id;
+
+    // Verificar se o pet existe
+    const pet = await Pet.findOne({ _id: id });
+
+    if (!pet) {
+      res.status(404).json({
+        message: "Pet não encontrado!",
+      });
+      return;
     }
+
+    
+
+    const token = getToken(req);
+    const user = await getUserByToken(token);
+
+    if (user.id.toString() !== pet.user._id.toString()) {
+      res.status(404).json({
+        message: "Houve um problema parar processar a adoção! Tente novamente.",
+      });
+      return;
+    }
+
+    pet.available = false
 
     await Pet.findByIdAndUpdate(id, pet)
 
     res.status(200).json({
-      message: `A visita foi cadastrada com sucesso, entre em contato com ${pet.user.name} no telefone ${pet.user.phone}`
+      message: "Parabéns. O ciclo de adoção foi finalizado com sucesso!"
     })
-
-    
   }
 };
