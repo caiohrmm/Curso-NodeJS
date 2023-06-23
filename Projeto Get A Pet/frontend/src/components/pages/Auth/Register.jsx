@@ -8,12 +8,29 @@ import styles2 from "../../form/Form.module.css";
 // Importando Link react dom
 import { NavLink } from "react-router-dom";
 
-const handleChange = (e) => {};
+// Importando hooks
+import { useState } from "react";
+
+
 const Register = () => {
+
+  const [user, setUser] = useState({}) // Estado inicial do meu usuário é um objeto vazio.
+
+  const handleChange = (e) => {
+    // Setarei o usuario com base nos dados passados no formulário.
+    setUser({...user, [e.target.name]: e.target.value})
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // Enviar user para meu banco
+
+
+  }
   return (
     <section>
       <h1 className={styles}>Registrar</h1>
-      <form action="" method="POST" className={styles2.form_container}>
+      <form onSubmit={handleSubmit} className={styles2.form_container}>
         <Input
           text="Nome"
           type="text"
