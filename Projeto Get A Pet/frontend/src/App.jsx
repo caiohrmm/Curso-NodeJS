@@ -9,13 +9,14 @@ import Home from "./components/pages/Home";
 // Importando componentes de layout da página
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import Container from "./components/layout/Container";
 
 function App() {
   return (
     // Criando estruturas de rotas com React-router-dom 6
     <BrowserRouter>
       <Navbar />
-      <div className="container">
+      <Container>
         <Routes>
           <Route path="/login" element={<Login />} />{" "}
           {/* Renderiza a página de Login */}
@@ -23,7 +24,7 @@ function App() {
           {/* Renderiza a página de Cadastro */}
           <Route path="/" element={<Home />} /> {/* Renderiza a página Home */}
         </Routes>
-      </div>
+      </Container>
       <Footer />
     </BrowserRouter>
   );
