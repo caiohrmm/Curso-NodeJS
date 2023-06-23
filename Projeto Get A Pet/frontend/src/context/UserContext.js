@@ -11,3 +11,4 @@ function UserProvider({ children }) {
 }
 
 export {Context, UserProvider}
+// O context me dá acesso aos metodos, o Provider faz eu conseguir usá-los.

@@ -9,24 +9,27 @@ import styles2 from "../../form/Form.module.css";
 import { NavLink } from "react-router-dom";
 
 // Importando hooks
-import { useState } from "react";
+import { useContext, useState } from "react";
 
+// Importando contexts
+import { Context } from "../../../context/UserContext";
 
 const Register = () => {
-
-  const [user, setUser] = useState({}) // Estado inicial do meu usuário é um objeto vazio.
+  const [user, setUser] = useState({}); // Estado inicial do meu usuário é um objeto vazio.
 
   const handleChange = (e) => {
     // Setarei o usuario com base nos dados passados no formulário.
-    setUser({...user, [e.target.name]: e.target.value})
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  // Usando meu contexto!
+  const { register } = useContext(Context);
+
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // Enviar user para meu banco
-
-
-  }
+    register(user); // Fazendo o post do usuário
+  };
   return (
     <section>
       <h1 className={styles}>Registrar</h1>
