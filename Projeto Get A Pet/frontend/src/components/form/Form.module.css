@@ -1,0 +1,43 @@
+.form_container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 15px;
+}
+
+.form_container input[type='submit'] {
+    border-radius: 8px;
+    background-color: #16379d;
+    color: #fff;
+    border: none;
+    min-height: 2.5em;
+    width: 100%;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: .5s;
+    margin-bottom: 0.3em;
+}
+
+.form_container input[type='submit']:hover {
+    transform: scale(1.01);
+    background-color: #0501FE;
+}
+
+.form_container p {
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.form_container p a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #16379d;
+    transition: .5s;
+    border-bottom: 1px solid transparent;
+}
+
+.form_container p a:hover {
+    color: #0501FE;
+    border-bottom: 1px solid #16379d;
+}
