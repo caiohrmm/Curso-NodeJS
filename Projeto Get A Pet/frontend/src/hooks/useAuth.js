@@ -5,7 +5,7 @@ import api from "../utils/api";
 
 import { useState, useEffect } from "react";
 import useFlashMessage from "./useFlashMessage";
-import {useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 export default function useAuth() {
   const { setFlashMessage } = useFlashMessage();
@@ -17,14 +17,14 @@ export default function useAuth() {
 
   useEffect(() => {
     // Pego o token do localStorage
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
 
     // Mando ele para minha API e autentico o usuario.
     if (token) {
-      api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`
-      setAuthenticated(true)
+      api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+      setAuthenticated(true);
     }
-  }, [])
+  }, []);
 
   async function register(user) {
     let msgText = "Cadastro realizado com sucesso!";
@@ -36,8 +36,8 @@ export default function useAuth() {
         .post("/users/register", user)
         .then((response) => response.data);
 
-        // Após fazer toda a verificação com a API e passar por todos os testes. Ele autentica o usuario e manda para home.
-        await authUser(data)
+      // Após fazer toda a verificação com a API e passar por todos os testes. Ele autentica o usuario e manda para home.
+      await authUser(data);
     } catch (error) {
       // Caso de algum erro, ele aparece na tela a mensagem de erro de validacao da API
       msgText = error.response.data.message;
@@ -56,22 +56,43 @@ export default function useAuth() {
     localStorage.setItem("token", JSON.stringify(data.token));
 
     // Mando o usuário para a home
-    navigate('/')
+    navigate("/");
   }
 
   const logout = () => {
-    const msgText = "Logout realizado com sucesso!"
-    const msgType = 'success'
+    const msgText = "Logout realizado com sucesso!";
+    const msgType = "success";
 
-    setAuthenticated(false)
-    localStorage.removeItem('token')
+    setAuthenticated(false);
+    localStorage.removeItem("token");
 
-    api.defaults.Authorization = undefined
+    api.defaults.Authorization = undefined;
 
-    navigate('/')
+    navigate("/");
 
-    setFlashMessage(msgText, msgType)
+    setFlashMessage(msgText, msgType);
+  };
+
+  async function login(user) {
+    let msgText = "Login realizado com sucesso!";
+    let msgType = "success";
+
+    try {
+      // Aqui eu farei basicamente o que eu estava fazendo com o postman, mando dados para minha API e ela me retorna algo.
+      const data = await api
+        .post("/users/login", user)
+        .then((response) => response.data);
+
+      // Após fazer toda a verificação com a API e passar por todos os testes. Ele autentica o usuario e manda para home.
+      await authUser(data);
+    } catch (error) {
+      // Caso de algum erro, ele aparece na tela a mensagem de erro de validacao da API
+      msgText = error.response.data.message;
+      msgType = "error";
+    }
+
+    setFlashMessage(msgText, msgType);
   }
 
-  return { register, authenticated, logout };
+  return { register, authenticated, logout, login };
 }
