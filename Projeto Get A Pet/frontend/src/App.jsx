@@ -15,26 +15,31 @@ import Message from "./components/layout/Message";
 // Importando contextos
 import { UserProvider } from "./context/UserContext";
 
+// Chakra
+import { ChakraProvider } from "@chakra-ui/react";
+
 function App() {
   return (
     // Criando estruturas de rotas com React-router-dom 6
-    <BrowserRouter>
-      <UserProvider>
-        <Navbar />
-        <Message/>
-        <Container>
-          <Routes>
-            <Route path="/login" element={<Login />} />{" "}
-            {/* Renderiza a página de Login */}
-            <Route path="/register" element={<Register />} />{" "}
-            {/* Renderiza a página de Cadastro */}
-            <Route path="/" element={<Home />} />{" "}
-            {/* Renderiza a página Home */}
-          </Routes>
-        </Container>
-        <Footer />
-      </UserProvider>
-    </BrowserRouter>
+    <ChakraProvider>
+      <BrowserRouter>
+        <UserProvider>
+          <Navbar />
+          <Message />
+          <Container>
+            <Routes>
+              <Route path="/login" element={<Login />} />{" "}
+              {/* Renderiza a página de Login */}
+              <Route path="/register" element={<Register />} />{" "}
+              {/* Renderiza a página de Cadastro */}
+              <Route path="/" element={<Home />} />{" "}
+              {/* Renderiza a página Home */}
+            </Routes>
+          </Container>
+          <Footer />
+        </UserProvider>
+      </BrowserRouter>
+    </ChakraProvider>
   );
 }
 

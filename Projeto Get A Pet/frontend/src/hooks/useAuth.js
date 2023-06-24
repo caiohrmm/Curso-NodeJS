@@ -59,5 +59,13 @@ export default function useAuth() {
     navigate('/')
   }
 
+  const logout = () => {
+    const msgText = "Logout realizado com sucesso!"
+    const msgType = 'success'
+
+    setAuthenticated(false)
+    localStorage.removeItem('token')
+  }
+
   return { register, authenticated };
 }
