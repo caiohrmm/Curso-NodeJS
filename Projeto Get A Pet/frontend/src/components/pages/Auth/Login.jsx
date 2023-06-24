@@ -43,7 +43,7 @@ const Login = () => {
         />
         <input type="submit" value="Login" />
         <p>
-          Já tem conta? <NavLink to={"/login"}>Clique aqui !</NavLink>
+          Não tem conta? <NavLink to={"/register"}>Cadastre-se!</NavLink>
         </p>
       </form>
     </section>

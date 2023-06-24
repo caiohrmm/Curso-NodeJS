@@ -50,7 +50,8 @@
 .navbar ul li a {
     cursor: pointer;
     text-decoration: none;
-    color: #484848	;
+    color: #fff;
+    font-weight: 500;
     transition: .5s;
     border-bottom: 1.5px solid transparent;
     padding-bottom: 0.1em;
