@@ -1,8 +1,19 @@
 .footer {
     display: flex;
-    background-color: #eee;
+    background-color: #DDC500;
     align-items: center;
     justify-content: center;
     border-top: 1px solid #6656;
-    height: 80px;
+    padding: 1em;
+}
+
+.footer p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.desc {
+    font-size: 0.8em;
 }
