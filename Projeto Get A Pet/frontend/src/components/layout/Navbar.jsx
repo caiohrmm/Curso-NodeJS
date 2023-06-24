@@ -34,7 +34,7 @@ const Navbar = () => {
         {authenticated ? (
           <>
             <li>
-              <NavLink to={"/login"} onClick={onOpen}>
+              <NavLink onClick={onOpen}>
                 Sair
               </NavLink>
               <ModalComponent isOpen={isOpen} onClose={onClose}/>
