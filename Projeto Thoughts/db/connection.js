@@ -1,8 +1,8 @@
 // Fazendo a conexao com o banco pelo sequelize
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("projetothoughts", "caioh", "caiohenrique@12345", {
-  host: "localhost",
+const sequelize = new Sequelize("projetothoughts", "root", "joj123", {
+  host: "banco-thoughts",
   dialect: "mysql",
 });
 
