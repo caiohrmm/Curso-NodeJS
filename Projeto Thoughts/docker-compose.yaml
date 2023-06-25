@@ -1,0 +1,37 @@
+version: "3.8"
+networks:
+  projeto-thoughts:
+    driver: bridge
+volumes:
+  volume-thoughts:
+services:
+  app:
+    image: teste
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - projeto-thoughts
+  db:
+    image: mysql
+    build:
+      context: .
+      dockerfile: .dockerfile
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=joj123
+      - MYSQL_ROOT_PASSWORD=joj123
+      - MYSQL_DATABASE=thoughts
+    volumes:
+      - volume-thoughts:/var/lib/mysql
+    restart: always
+    networks:
+      - projeto-thoughts

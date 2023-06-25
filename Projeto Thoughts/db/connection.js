@@ -1,11 +1,10 @@
 // Fazendo a conexao com o banco pelo sequelize
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("projetothoughts", "root", "joj123", {
-  host: "banco-thoughts",
+const sequelize = new Sequelize("thoughts", "root", "joj123", {
+  host: "db",
   dialect: "mysql",
 });
-
 try {
   sequelize.authenticate();
   console.log("Conectado ao banco de dados!");
