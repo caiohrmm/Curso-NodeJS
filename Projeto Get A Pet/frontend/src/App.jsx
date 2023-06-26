@@ -18,6 +18,7 @@ import { UserProvider } from "./context/UserContext";
 
 // Chakra
 import { ChakraProvider } from "@chakra-ui/react";
+import MyPets from "./components/Pets/MyPets";
 
 function App() {
   return (
@@ -36,6 +37,8 @@ function App() {
               <Route path="/" element={<Home />} />
               {/* Renderiza a página Home */}
               <Route path="/user/profile" element={<Profile />} />
+              {/* Renderiza página de meus pets */}
+              <Route path="/pet/mypets" element={<MyPets/>} />
             </Routes>
           </Container>
           <Footer />

@@ -17,7 +17,7 @@ import ModalComponent from "../Modal/ModalComponent";
 const Navbar = () => {
   const { authenticated } = useContext(Context);
 
-  const {isOpen, onOpen, onClose} = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbar_logo}>
@@ -31,16 +31,15 @@ const Navbar = () => {
         {authenticated ? (
           <>
             <li>
-              <NavLink to={'/user/profile'}>
-                Meu perfil
-              </NavLink>
+              <NavLink to={"/pet/mypets"}>Meus pets</NavLink>
             </li>
             <li>
-              <NavLink onClick={onOpen}>
-                Sair
-              </NavLink>
-              <ModalComponent isOpen={isOpen} onClose={onClose}/>
+              <NavLink to={"/user/profile"}>Meu perfil</NavLink>
             </li>
+            <li>
+              <NavLink onClick={onOpen}>Sair</NavLink>
+            </li>
+            <ModalComponent isOpen={isOpen} onClose={onClose} />
           </>
         ) : (
           <>
