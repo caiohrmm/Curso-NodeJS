@@ -17,6 +17,10 @@ const Profile = () => {
   // Pego o token do meu localStorage
   const [token] = useState(localStorage.getItem("token" || ""));
 
+  const [preview, setPreview] = (null)
+
+
+
   const { setFlashMessage } = useFlashMessage();
   useEffect(() => {
     api
@@ -71,7 +75,10 @@ const Profile = () => {
     <section>
       <div className={styles.profile_container}>
         <h1>Perfil</h1>
-        <p>Preview da imagem</p>
+        {/* Caso exista uma imagem de usuario ou um preview, ele renderiza esse JSX */}
+        {(user.image || preview) && (
+          <img src={preview ? URL.createObjectURL(preview) : `${process.env.REACT_APP_API}/users/images/${user.image}`} alt={user.image} />
+        )}
       </div>
       <form className={formStyles.form_container} onSubmit={handleSubmit}>
         <Input
