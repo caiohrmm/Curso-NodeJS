@@ -10,6 +10,8 @@ import useFlashMessage from "../../../hooks/useFlashMessage";
 
 // Importando componentes
 import Input from "../../form/Input";
+import RoundedImage from "../../layout/RoundedImage";
+
 import { useEffect, useState } from "react";
 
 const Profile = () => {
@@ -17,9 +19,7 @@ const Profile = () => {
   // Pego o token do meu localStorage
   const [token] = useState(localStorage.getItem("token" || ""));
 
-  const [preview, setPreview] = (null)
-
-
+  const [preview, setPreview] = useState();
 
   const { setFlashMessage } = useFlashMessage();
   useEffect(() => {
@@ -33,6 +33,7 @@ const Profile = () => {
   }, [token]);
 
   const onFileChange = (e) => {
+    setPreview(e.target.files[0]);
     setUser({ ...user, [e.target.name]: e.target.files[0] });
   };
 
@@ -77,7 +78,14 @@ const Profile = () => {
         <h1>Perfil</h1>
         {/* Caso exista uma imagem de usuario ou um preview, ele renderiza esse JSX */}
         {(user.image || preview) && (
-          <img src={preview ? URL.createObjectURL(preview) : `${process.env.REACT_APP_API}/users/images/${user.image}`} alt={user.image} />
+          <RoundedImage
+            src={
+              preview
+                ? URL.createObjectURL(preview)
+                : `${process.env.REACT_APP_API}/images/users/${user.image}`
+            }
+            alt={user.image}
+          />
         )}
       </div>
       <form className={formStyles.form_container} onSubmit={handleSubmit}>
