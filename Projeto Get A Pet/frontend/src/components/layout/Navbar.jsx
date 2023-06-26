@@ -34,6 +34,9 @@ const Navbar = () => {
               <NavLink to={"/pet/mypets"}>Meus pets</NavLink>
             </li>
             <li>
+              <NavLink to={"/pet/add"}>Cadastrar pet</NavLink>
+            </li>
+            <li>
               <NavLink to={"/user/profile"}>Meu perfil</NavLink>
             </li>
             <li>

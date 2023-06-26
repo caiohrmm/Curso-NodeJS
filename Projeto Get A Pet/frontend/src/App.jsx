@@ -19,6 +19,7 @@ import { UserProvider } from "./context/UserContext";
 // Chakra
 import { ChakraProvider } from "@chakra-ui/react";
 import MyPets from "./components/Pets/MyPets";
+import AddPet from "./components/Pets/AddPet";
 
 function App() {
   return (
@@ -38,7 +39,9 @@ function App() {
               {/* Renderiza a página Home */}
               <Route path="/user/profile" element={<Profile />} />
               {/* Renderiza página de meus pets */}
-              <Route path="/pet/mypets" element={<MyPets/>} />
+              <Route path="/pet/mypets" element={<MyPets />} />
+              {/* Renderiza página de cadastro de pets */}
+              <Route path="/pet/add" element={<AddPet/>} />
             </Routes>
           </Container>
           <Footer />
