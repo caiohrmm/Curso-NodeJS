@@ -1,0 +1,20 @@
+.profile_container {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.profile_container input[type='file'] { 
+    display: none;
+}
+
+.profile_container label {
+    cursor: pointer;
+    max-width: 250px;
+    background-color: gray;
+    margin: 0 auto;
+    padding: .5em 2em;
+    border-radius: 5px;
+}
+.profile_container p {
+    margin-bottom: 1em;
+}
