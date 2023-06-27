@@ -13,24 +13,25 @@ const PetForm = ({ handleSubmit, btnText, petData }) => {
 
   // Opcao que salva as imagens no atributo de images do pet
   const onFileChange = (e) => {
+    setPreview(Array.from(e.target.files));
     setPet({ ...pet, images: [...e.target.files] });
   };
 
   // Pega todos os atributos do pet
   const handleChange = (e) => {
-    setPet({...pet, [e.target.name]: e.target.value})
+    setPet({ ...pet, [e.target.name]: e.target.value });
   };
 
   // Pega o valor da cor
   const handleColor = (e) => {
-    setPet({...pet, colors: e.target.options[e.target.selectedIndex].text})
+    setPet({ ...pet, colors: e.target.options[e.target.selectedIndex].text });
   };
 
   const submit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // handleSubmit(pet)
-    console.log(pet)
-  }
+    console.log(pet);
+  };
 
   const colors = [
     "Branco",
@@ -45,6 +46,16 @@ const PetForm = ({ handleSubmit, btnText, petData }) => {
   ];
   return (
     <form className={formStyles.form_container} onSubmit={submit}>
+      <div className={formStyles.preview}>
+        {/* Caso houver preview, renderiza as imagens de preview com o map, caso contrario as imagens do pet padrao */}
+        {preview.length > 0
+          ? preview.map((image, index) => (
+            <img src={URL.createObjectURL(image)} alt={pet.name} key={`${pet.name}.${index}`}/>
+          ))
+          : pet.images && pet.images.map((image, index) => (
+            <img src={`${process.env.REACT_APP_API}/images/pets/${image}`} alt={pet.name} key={`${pet.name}.${index}`}/>
+          ))}
+      </div>
       <Input
         text="Imagens do pet"
         type="file"
