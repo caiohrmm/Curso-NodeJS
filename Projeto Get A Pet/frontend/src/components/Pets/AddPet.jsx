@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useFlashMessage } from "../../hooks/useFlashMessage";
+import PetForm from "../form/PetForm";
 
 const AddPet = () => {
   return (
@@ -15,7 +16,7 @@ const AddPet = () => {
         <h1>Cadastre um Pet</h1>
         <p>Após o cadastro, ele ficará disponível para adoção!</p>
       </div>
-      <form action=""></form>
+      <PetForm btnText='Cadastrar' />
     </section>
   );
 };
