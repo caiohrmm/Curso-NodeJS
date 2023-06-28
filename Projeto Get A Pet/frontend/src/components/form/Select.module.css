@@ -1,19 +1,23 @@
 .form_control select {
   padding: 0.7em;
-    border: 1.5px solid #777;
-    border-radius: 4px;
-    font-size: .7em;
+  border: 1.5px solid #777;
+  border-radius: 4px;
+  font-size: 0.7em;
+  outline: none;
 }
 
 .form_control {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1.2em;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2em;
 }
 
 .form_control label {
-    margin-bottom: .4em;
-    font-weight: bold;
-    font-size: 0.9em;
-    padding: .3em;
+  margin-bottom: 0.4em;
+  font-weight: bold;
+  font-size: 0.9em;
+  padding: 0.3em;
+}
+.form_control select:focus {
+  outline: none;
 }

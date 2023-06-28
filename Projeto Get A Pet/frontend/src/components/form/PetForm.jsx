@@ -24,13 +24,12 @@ const PetForm = ({ handleSubmit, btnText, petData }) => {
 
   // Pega o valor da cor
   const handleColor = (e) => {
-    setPet({ ...pet, colors: e.target.options[e.target.selectedIndex].text });
+    setPet({ ...pet, color: e.target.options[e.target.selectedIndex].text });
   };
 
   const submit = (e) => {
     e.preventDefault();
-    // handleSubmit(pet)
-    console.log(pet);
+    handleSubmit(pet);
   };
 
   const colors = [
@@ -50,11 +49,20 @@ const PetForm = ({ handleSubmit, btnText, petData }) => {
         {/* Caso houver preview, renderiza as imagens de preview com o map, caso contrario as imagens do pet padrao */}
         {preview.length > 0
           ? preview.map((image, index) => (
-            <img src={URL.createObjectURL(image)} alt={pet.name} key={`${pet.name}.${index}`}/>
-          ))
-          : pet.images && pet.images.map((image, index) => (
-            <img src={`${process.env.REACT_APP_API}/images/pets/${image}`} alt={pet.name} key={`${pet.name}.${index}`}/>
-          ))}
+              <img
+                src={URL.createObjectURL(image)}
+                alt={pet.name}
+                key={`${pet.name}.${index}`}
+              />
+            ))
+          : pet.images &&
+            pet.images.map((image, index) => (
+              <img
+                src={`${process.env.REACT_APP_API}/images/pets/${image}`}
+                alt={pet.name}
+                key={`${pet.name}.${index}`}
+              />
+            ))}
       </div>
       <Input
         text="Imagens do pet"
@@ -81,7 +89,7 @@ const PetForm = ({ handleSubmit, btnText, petData }) => {
       />
       <Input
         text="Peso do pet"
-        type="numer"
+        type="number"
         name="weight"
         handleOnChange={handleChange}
         placeholder="Digite o peso do Pet..."
@@ -92,6 +100,7 @@ const PetForm = ({ handleSubmit, btnText, petData }) => {
         name="color"
         text="Selecione a cor"
         handleOnChange={handleColor}
+        value={pet.color || ''}
       />
 
       <input type="submit" value={btnText} />

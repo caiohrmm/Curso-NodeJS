@@ -18,8 +18,8 @@ import { UserProvider } from "./context/UserContext";
 
 // Chakra
 import { ChakraProvider } from "@chakra-ui/react";
-import MyPets from "./components/Pets/MyPets";
-import AddPet from "./components/Pets/AddPet";
+import MyPets from "./components/pages/Pets/MyPets";
+import AddPet from "./components/pages/Pets/AddPet";
 
 function App() {
   return (
