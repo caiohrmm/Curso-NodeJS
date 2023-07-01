@@ -1,31 +1,26 @@
-version: "3.7"
-
-networks:
-  projeto-getapet:
-    driver: bridge
-
-volumes:
-  volume-getapet:
+version: "3.1"
 
 services:
-  api:
-    build: .
-    ports:
-      - "4000:4000"
-    depends_on:
-      - db
-    networks:
-      - projeto-getapet
-
-  db:
+  mongo:
     image: mongo
     restart: always
     ports:
-      - "27017:27017"
-    expose:
-      - 27017
-    networks:
-      - projeto-getapet
+      - 27017:27017
+    container_name: banco-mongodb
     volumes:
-      - volume-getapet:/data/db
+      - volume-mongodb:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secreto
 
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: secreto
+      ME_CONFIG_MONGODB_URL: mongodb://root:secreto@mongo:27017/
+volumes:
+  volume-mongodb:
