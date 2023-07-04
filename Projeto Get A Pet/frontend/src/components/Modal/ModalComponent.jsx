@@ -12,18 +12,14 @@ import {
 import { Context } from "../../context/UserContext";
 import { useContext } from "react";
 
-const ModalComponent = ({ isOpen, onOpen, onClose }) => {
-  const { logout } = useContext(Context);  
-  const handleClick = () => {
-      onClose()
-      logout()
-  }
+const ModalComponent = ({ isOpen, onOpen, onClose, header, action, handleClick }) => {
+  const { logout } = useContext(Context);
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Tem certeza que deseja sair ?</ModalHeader>
+          <ModalHeader>{header}</ModalHeader>
           <ModalCloseButton />
           <ModalBody></ModalBody>
 
@@ -36,9 +32,8 @@ const ModalComponent = ({ isOpen, onOpen, onClose }) => {
               backgroundColor="red.500"
               colorScheme="orange"
               onClick={handleClick}
-      
             >
-              Sair
+              {action}
             </Button>
           </ModalFooter>
         </ModalContent>

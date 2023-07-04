@@ -9,13 +9,21 @@ import styles from "./Navbar.module.css";
 
 // Importando context do usuario
 import { Context } from "../../context/UserContext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import { useDisclosure } from "@chakra-ui/react";
 import ModalComponent from "../Modal/ModalComponent";
 
+
 const Navbar = () => {
   const { authenticated } = useContext(Context);
+
+  const { logout } = useContext(Context);
+
+  const handleClick = () => {
+    onClose();
+    logout();
+  };
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -42,7 +50,13 @@ const Navbar = () => {
             <li>
               <NavLink onClick={onOpen}>Sair</NavLink>
             </li>
-            <ModalComponent isOpen={isOpen} onClose={onClose} />
+            <ModalComponent
+              isOpen={isOpen}
+              onClose={onClose}
+              handleClick={handleClick}
+              header="Tem certeza que deseja sair ?"
+              action="Sair"
+            />
           </>
         ) : (
           <>

@@ -4,8 +4,8 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 2em;
-  justify-content: center;
   width: 100%;
+  justify-content: center;
 }
 .petslist_header h1 {
   width: 100%;
@@ -18,7 +18,7 @@
   flex-direction: column;
 }
 
-.petslist_header a {
+.petslist_header a, .petslist_header a.link {
   border-radius: 8px;
   background-color: #16379d;
   color: #fff;
@@ -28,8 +28,14 @@
   font-weight: bold;
   transition: 0.5s;
   margin-bottom: 1em;
-  margin-top: 0.5em;
   padding: 0.5em 1em;
+  margin-top: 0.5em;
+}
+
+.petslist_header a.link {
+  padding: 0.4em 0.8em;
+  margin-bottom: 0.8em;
+  margin-top: 0em;
 }
 
 .petslist_header a:hover {
@@ -44,19 +50,27 @@
 
 .container {
   display: flex;
-  border: 1px solid black;
   width: 100%;
   padding: 1em;
   background-color: #EBEBEB;
-  border: 1.5px solid black;
-  border-radius: 8px;
+  border-radius: 4px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  justify-content: center;
+}
+
+.teste {
+  width: 100%;
 }
 
 .pet {
   width: 100%;
   display: flex;
   align-items: center;
-  
+  border-bottom: 1.5px solid black;
+  padding: 1em;
+  margin-bottom: 1em;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 .pet span {
@@ -90,21 +104,37 @@
 .actions a,
 .actions button {
   text-decoration: none;
-  color: #16479d;
+  color: #fff;
   border: 2px solid #16479d;
   border-radius: 5px;
-  padding: 7px 12px;
-  background-color: #fff;
+  padding: 8px 16px;
+  background-color: #16479d;
   margin-left: 1em;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.5s;
   font-size: 12px;
+  font-weight: bold;
 }
 
-.actions a:hover,
-.actions button:hover {
-  background-color: #16479d;
+.actions a i,
+.actions button i {
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+
+
+.actions a:hover {
+  background-color: green;
   color: #fff;
+  border: 2px solid green;
+  
+}
+
+.actions button:hover {
+  background-color: red;
+  color: #fff;
+  border: 2px solid red;
 }
 
 .actions .conclude_btn {
