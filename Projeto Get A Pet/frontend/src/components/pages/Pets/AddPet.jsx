@@ -12,7 +12,7 @@ import PetForm from "../../form/PetForm";
 
 const AddPet = () => {
   // Pegar o token para validação no meu local storage
-  const [token] = useState(localStorage.getItem("token", ""));
+  const [token] = useState(localStorage.getItem("token") || "");
 
   // Pegar as minhas flash messages
   const { setFlashMessage } = useFlashMessage();
@@ -45,9 +45,11 @@ const AddPet = () => {
 
     // Fazendo o post dos dados. Preciso de autorizacao
     const data = await api
-      .post("pets/create", formData, {
-        Authorization: `Bearer ${JSON.parse(token)}`,
-        "Content-Type": "multipart/form-data",
+      .post("/pets/create", formData, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          "Content-Type": "multipart/form-data",
+        },
       })
       .then((response) => {
         return response.data;
@@ -59,7 +61,7 @@ const AddPet = () => {
 
     setFlashMessage(data.message, msgType);
     if (msgType !== "error") {
-      navigate("/pets/mypets");
+      navigate("/pet/mypets");
     }
   };
 

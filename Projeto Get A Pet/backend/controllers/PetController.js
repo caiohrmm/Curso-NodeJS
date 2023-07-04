@@ -106,11 +106,10 @@ module.exports = class PetController {
     const token = getToken(req);
     const user = await getUserByToken(token); // Pegando meu usuario baseado no token.
 
-    const pets = await Pet.find({ "user._id": user.id }).sort("-createdAt");
-
+    const pets = await Pet.find({ "user._id": user._id })
     // Quando preciso filtrar algum dado de um subdocument do MongoDB eu filtro por ''.
     res.status(200).json({
-      message: pets,
+      pets,
     });
   }
 
@@ -355,8 +354,6 @@ module.exports = class PetController {
       return;
     }
 
-    
-
     const token = getToken(req);
     const user = await getUserByToken(token);
 
@@ -367,12 +364,12 @@ module.exports = class PetController {
       return;
     }
 
-    pet.available = false
+    pet.available = false;
 
-    await Pet.findByIdAndUpdate(id, pet)
+    await Pet.findByIdAndUpdate(id, pet);
 
     res.status(200).json({
-      message: "Parabéns. O ciclo de adoção foi finalizado com sucesso!"
-    })
+      message: "Parabéns. O ciclo de adoção foi finalizado com sucesso!",
+    });
   }
 };

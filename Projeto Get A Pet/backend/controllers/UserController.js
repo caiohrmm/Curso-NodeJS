@@ -155,7 +155,6 @@ module.exports = class UserController {
       const token = getToken(req);
       const decoded = jwt.verify(token, "meusecretdificildemais123");
 
-      console.log(decoded);
       currentUser = await User.findById(decoded.id);
 
       currentUser.password = undefined;
