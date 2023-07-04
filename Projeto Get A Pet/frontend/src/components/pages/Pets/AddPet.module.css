@@ -6,3 +6,8 @@
 .addpet_header {
     margin-bottom: 1em;
 }
+
+.addpet_header h1 i {
+    font-size: 0.8em;
+    transform: rotate(360deg);
+}
