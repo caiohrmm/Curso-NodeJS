@@ -5,6 +5,7 @@
     justify-content: center;
     border-top: 1px solid #6656;
     padding: 1em;
+    cursor: default;
 }
 
 .footer p {
@@ -16,4 +17,7 @@
 
 .desc {
     font-size: 0.8em;
+}
+.title {
+    color: #16479d;
 }
