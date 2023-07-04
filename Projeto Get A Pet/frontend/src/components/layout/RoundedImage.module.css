@@ -8,7 +8,7 @@
     box-shadow: 0px 6px 5px #ccc;
 }
 
-.rounded_image .px75 {
+.rounded_image.px75 {
     width: 75px;
     height: 75px;
 }

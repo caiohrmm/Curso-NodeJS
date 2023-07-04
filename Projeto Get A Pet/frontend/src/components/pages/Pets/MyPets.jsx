@@ -34,32 +34,32 @@ const MyPets = () => {
   return (
     <section className={dashboard.petslist_header}>
       <h1>Meus Pets</h1>
-      <div>
+      <div className={dashboard.container}>
         {(pets.length === 0 || "") && (
-          <>
+          <div className={dashboard.sem}>
             <h2>Não existem pets cadastrados...</h2>
-            <h3>
-              <NavLink to={"/pet/add"}>Clique aqui</NavLink>
-              &nbsp;para adicionar um pet !
-            </h3>
-          </>
+            <NavLink to={"/pet/add"}>Cadastrar pet</NavLink>
+          </div>
         )}
         {pets.length > 0 && (
           <>
             {pets.map((pet) => (
-              <div key={pet._id}>
-                <RoundedImage
-                  src={`${process.env.REACT_APP_API}/images/pets/${pet.images[0]}`}
-                  alt={pet.images[0]}
-                  width="75px"
-                />
-                <span className="bold">{pet.name}</span>
-                <div className={styles.actions}>
+              <div key={pet._id} className={dashboard.pet}>
+                <div className={dashboard.imgenome}>
+                  <RoundedImage
+                    src={`${process.env.REACT_APP_API}/images/pets/${pet.images[0]}`}
+                    alt={pet.images[0]}
+                    width="px75"
+                  />
+                  <span>{pet.name}</span>
+                </div>
+
+                <div className={dashboard.actions}>
                   {pet.available ? (
                     <>
                       {pet.adopter && (
                         <button
-                          className={styles.conclude_btn}
+                          className={dashboard.conclude_btn}
                           onClick={() => {
                             //concludeAdoption(pet._id);
                           }}
