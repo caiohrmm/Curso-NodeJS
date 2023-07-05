@@ -22,6 +22,7 @@ import MyPets from "./components/pages/Pets/MyPets";
 import AddPet from "./components/pages/Pets/AddPet";
 import EditPet from "./components/pages/Pets/EditPet";
 
+
 function App() {
   return (
     // Criando estruturas de rotas com React-router-dom 6
@@ -42,10 +43,9 @@ function App() {
               {/* Renderiza página de meus pets */}
               <Route path="/pet/mypets" element={<MyPets />} />
               {/* Renderiza página de cadastro de pets */}
-              <Route path="/pet/add" element={<AddPet/>} />
+              <Route path="/pet/add" element={<AddPet />} />
               {/* Renderiza página de edição de pets */}
-              <Route path="/pet/edit/:id" element={<EditPet/>} />
-              
+              <Route path="/pet/edit/:id" element={<EditPet />} />
             </Routes>
           </Container>
           <Footer />
