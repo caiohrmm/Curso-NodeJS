@@ -25,7 +25,7 @@ const Home = () => {
       </div>
       <div className={styles.container}>
         {pets.length > 0 &&
-          pets.map((pet) => <div className={styles.pet}></div>)}
+          pets.map((pet) => <div className={styles.pet} key={pet._id}>{pet.name}</div>)}
         {pets.length === 0 && <p>Não existem pets cadastrados no sistema!</p>}
       </div>
     </section>
