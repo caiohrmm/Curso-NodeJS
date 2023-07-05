@@ -79,7 +79,12 @@
     background-color: #C7B30B;
 }
 
-.pet_details .adopter {
+.pet_details .notadopter {
     color: darkgreen;
+    text-transform: uppercase;
+}
+
+.pet_details .adopter {
+    color: red;
     text-transform: uppercase;
 }

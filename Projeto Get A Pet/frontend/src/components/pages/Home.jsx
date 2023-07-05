@@ -35,10 +35,11 @@ const Home = () => {
               ></div>
               <h3>{pet.name}</h3>
               <div className={styles.pet_details}>
-                <p>Peso do pet - {pet.weight}kg <i class="fa-sharp fa-solid fa-dog"></i></p>
-                <p>Idade do pet - {pet.age} ano/s <i class="fa-solid fa-cat"></i></p>
                 {pet.available ? (
-                  <NavLink to={`/pet/${pet._id}`}>Mais detalhes</NavLink>
+                  <>
+                    <p className={styles.notadopter}>Disponível</p>
+                    <NavLink to={`/pet/${pet._id}`}>Mais detalhes</NavLink>
+                  </>
                 ) : (
                   <p className={styles.adopter}>Adotado</p>
                 )}
