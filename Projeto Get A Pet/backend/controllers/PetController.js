@@ -96,7 +96,7 @@ module.exports = class PetController {
     const pets = await Pet.find().sort("-createdAt"); // Pega os pets dos mais novos para os mais velhos.
 
     res.status(200).json({
-      message: pets,
+      pets,
     });
   }
 
