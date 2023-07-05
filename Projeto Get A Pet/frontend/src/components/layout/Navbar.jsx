@@ -30,7 +30,7 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <div className={styles.navbar_logo}>
         <img src={Logo} alt="Logo" />
-        <h2>Get a Pet</h2>
+        <NavLink to={'/'} className={styles.title}>Get a Pet</NavLink>
       </div>
       <ul>
         <li>

@@ -25,14 +25,14 @@
     transform: scale(1.2);
 }
 
-.navbar_logo h2 {
+.title {
     font-size: 1.6em;
     cursor: pointer;
     transition: 0.5s;
     border-bottom: 1.5px solid transparent;
 }
 
-.navbar_logo h2:hover {
+.title:hover {
     border-bottom: 1.5px solid #484848;
     color: #484848;
 }
