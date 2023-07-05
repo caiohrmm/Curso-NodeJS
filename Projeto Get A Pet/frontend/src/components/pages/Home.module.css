@@ -10,4 +10,76 @@
 
 .header p {
     font-size: 0.9em;
+    margin-bottom: 0.4em;
+}
+
+.container {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 22%;
+    margin: 1.5%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 1em;
+    border: 1.5px solid #ebebeb;
+    border-radius: 8px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    justify-content: center;
+    align-items: center;
+}
+
+.card_image {
+    background-size: cover;
+    background-position: center;
+    height: 225px;
+    width: 100%;
+    margin-bottom: 0.5em;
+    border-radius: 8px;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.card h3 {
+    text-transform: uppercase;
+    color: #484848;
+    font-weight: 600;
+    border-bottom: 1.5px solid #484848;
+    width: 80%;
+    margin-bottom: 0.3em;
+    font-size: 1em;
+}
+
+.pet_details {
+    font-size: 0.8em;
+    display: flex;
+    flex-direction: column;
+}
+
+.pet_details p{
+    margin-bottom: 0.4em;
+}
+
+.pet_details a {
+    border: 1px solid black;
+    padding: 0.5em 0.8em;
+    border-radius: 5px;
+    background-color: #FFF180;
+    text-transform: uppercase;
+    color: #000;
+    font-weight: bold;
+    transition: .4s;
+}
+.pet_details a:hover {
+    transform: scale(1.02);
+    color: #fff;
+    background-color: #C7B30B;
+}
+
+.pet_details .adopter {
+    color: darkgreen;
+    text-transform: uppercase;
 }
