@@ -86,7 +86,7 @@ const MyPets = () => {
                     alt={pet.images[0]}
                     width="px75"
                   />
-                  <span>{pet.name}</span>
+                  <p className={dashboard.pet_name}>{pet.name}</p>
                 </div>
 
                 <div className={dashboard.actions}>
