@@ -28,28 +28,41 @@ const PetDetails = () => {
     <>
       {pet.name && (
         <section>
-          <div>
+          <div className={styles.pet_header}>
             <h1>Detalhando o pet - {pet.name}</h1>
             <p>
               Caso tenha interesse, marque uma visita para conhecê-lo melhor!
             </p>
           </div>
-          <div>
+          <div className={styles.pet_images}>
             {pet.images.map((image, index) => (
               <RoundedImage
                 src={`${process.env.REACT_APP_API}/images/pets/${image}`}
                 alt={pet.name}
                 key={index}
+                className="border"
               />
             ))}
+          </div>
+          <div className={styles.pet_details}>
             <p>
-              Peso do pet - {pet.weight}kg{" "}
+              <span>Peso do pet</span> - {pet.weight}kg{" "}
               <i class="fa-sharp fa-solid fa-dog"></i>
             </p>
             <p>
-              Idade do pet - {pet.age} ano/s <i class="fa-solid fa-cat"></i>
+              <span>Idade do pet</span> - {pet.age} ano/s{" "}
+              <i class="fa-solid fa-cat"></i>
             </p>
-            {token ? (<button>Adotar</button>) : (<p>Você precisa de uma conta para conseguir adotar um Pet ! <NavLink to={'/register'}>Criar conta</NavLink></p>)}
+          </div>
+          <div className={styles.pet_adopter}>
+            {token ? (
+              <button>Agendar visita</button>
+            ) : (
+              <p>
+                Você precisa de uma conta para conseguir adotar um Pet !{" "}
+                <NavLink to={"/register"}>Criar conta</NavLink>
+              </p>
+            )}
           </div>
         </section>
       )}
