@@ -284,7 +284,7 @@ module.exports = class PetController {
 
     // check if user has already adopted this pet
     if (pet.adopter) {
-      if (pet.adopter._id.equals(user._id)) {
+      if (pet.adopter._id.equals(user.id)) {
         res.status(422).json({
           message: 'Você já agendou uma visita para este Pet!',
         })

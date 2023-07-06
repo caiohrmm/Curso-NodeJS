@@ -24,6 +24,25 @@ const PetDetails = () => {
     api.get(`/pets/${id}`).then((response) => setPet(response.data.pet));
   }, [id]);
 
+  const schedule = async () => {
+    let msgType = "success";
+
+    const data =  await api
+      .patch(`/pets/schedule/${pet._id}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        msgType = "error";
+        return err.response.data;
+      });
+    setFlashMessage(data.message, msgType);
+  };
+
   return (
     <>
       {pet.name && (
@@ -56,7 +75,7 @@ const PetDetails = () => {
           </div>
           <div className={styles.pet_adopter}>
             {token ? (
-              <button>Agendar visita</button>
+              <button onClick={schedule}>Agendar visita</button>
             ) : (
               <p>
                 Você precisa de uma conta para conseguir adotar um Pet !{" "}

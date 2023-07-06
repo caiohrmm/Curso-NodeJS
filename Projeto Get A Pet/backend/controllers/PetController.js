@@ -106,7 +106,7 @@ module.exports = class PetController {
     const token = getToken(req);
     const user = await getUserByToken(token); // Pegando meu usuario baseado no token.
 
-    const pets = await Pet.find({ "user._id": user._id })
+    const pets = await Pet.find({ "user._id": user._id });
     // Quando preciso filtrar algum dado de um subdocument do MongoDB eu filtro por ''.
     res.status(200).json({
       pets,
@@ -303,9 +303,7 @@ module.exports = class PetController {
     const token = getToken(req);
     const user = await getUserByToken(token);
 
-    if (
-      user.id === pet.user._id.toString() /* pet.user._id.equals(user.id) */
-    ) {
+    if (pet.user._id.equals(user._id) /* pet.user._id.equals(user.id) */) {
       res.status(422).json({
         message: "Você não pode agendar uma visita para seu próprio pet !",
       });
@@ -314,9 +312,9 @@ module.exports = class PetController {
 
     // Checkar se o usuário que está querendo a visita, já agendou uma visita
     if (pet.adopter) {
-      if (pet.adopter._id.equals(user.id)) {
+      if (pet.adopter._id === user.id) {
         res.status(422).json({
-          message: "Você já agendou uma visita para esse Pet!",
+          message: "Você já agendou uma visita para este Pet!",
         });
         return;
       }
