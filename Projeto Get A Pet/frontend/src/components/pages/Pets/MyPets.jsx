@@ -113,6 +113,7 @@ const MyPets = () => {
                           header="Tem certeza que deseja excluir o pet ?"
                           action="Excluir"
                           handleClick={() => {
+                            onClose()
                             removePet(pet._id);
                           }}
                         />

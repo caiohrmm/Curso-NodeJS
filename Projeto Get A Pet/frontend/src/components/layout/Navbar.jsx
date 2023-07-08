@@ -42,6 +42,9 @@ const Navbar = () => {
               <NavLink to={"/pet/mypets"}>Meus pets</NavLink>
             </li>
             <li>
+              <NavLink to={"/pet/myadoptions"}>Minhas adoções</NavLink>
+            </li>
+            <li>
               <NavLink to={"/pet/add"}>Cadastrar pet</NavLink>
             </li>
             <li>

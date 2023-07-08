@@ -71,6 +71,7 @@ export default function useAuth() {
     navigate("/");
 
     setFlashMessage(msgText, msgType);
+
   };
 
   async function login(user) {
