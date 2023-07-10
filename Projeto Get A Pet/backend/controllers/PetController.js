@@ -123,7 +123,7 @@ module.exports = class PetController {
 
     // Quando preciso filtrar algum dado de um subdocument do MongoDB eu filtro por ''.
     res.status(200).json({
-      message: pets,
+      pets,
     });
   }
 

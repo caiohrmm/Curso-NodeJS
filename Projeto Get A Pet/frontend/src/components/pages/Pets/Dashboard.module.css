@@ -11,6 +11,30 @@
   width: 100%;
 }
 
+.pet_contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  text-align: center;
+  margin-left: 4em;
+  flex-direction: column;
+}
+
+.pet_contact h3 {
+  border: none;
+  margin-right: 2em;
+  border-bottom: 1.5px solid #16379d;
+  padding: 0.8em;
+  color: #16379d;
+  font-weight: bold;
+}
+
+.pet_contact span {
+  text-transform: uppercase;
+  color: black;
+}
+
 .sem {
   display: flex;
   align-items: center;
