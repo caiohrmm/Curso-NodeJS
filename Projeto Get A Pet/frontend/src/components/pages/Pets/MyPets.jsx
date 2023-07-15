@@ -61,6 +61,24 @@ const MyPets = () => {
     setFlashMessage(data.message, msgType);
   };
 
+  const concludeAdoption = async (id) => {
+    let msgType = "success";
+
+    const data = await api
+      .patch(`/pets/conclude/${id}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      })
+      .then((response) => response.data)
+      .catch((err) => {
+        msgType = "error";
+        return err.response.data;
+      });
+
+    setFlashMessage(data.message, msgType);
+  };
+
   return (
     <section className={dashboard.petslist_header}>
       <h1>Meus Pets</h1>
@@ -96,7 +114,7 @@ const MyPets = () => {
                         <button
                           className={dashboard.conclude_btn}
                           onClick={() => {
-                            //concludeAdoption(pet._id);
+                            concludeAdoption(pet._id);
                           }}
                         >
                           Concluir adoção
@@ -113,7 +131,7 @@ const MyPets = () => {
                           header="Tem certeza que deseja excluir o pet ?"
                           action="Excluir"
                           handleClick={() => {
-                            onClose()
+                            onClose();
                             removePet(pet._id);
                           }}
                         />
