@@ -1,7 +1,7 @@
 // Fazendo a conexao com o banco pelo sequelize
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("taskslist", "root", "secreto", {
+const sequelize = new Sequelize("todolist", "caioh", "caiohenrique@12345", {
   host: "localhost",
   dialect: "mysql",
 });
